@@ -6,5 +6,11 @@ module.exports = {
     'stylelint-config-recess-order',
     'stylelint-rscss',
   ],
+  ignoreFiles: [
+    [
+      '**/*.js',
+      '**/*.ts',
+    ],
+  ],
 };
 
