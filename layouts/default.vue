@@ -1,8 +1,10 @@
 <template>
   <v-app>
-    <v-container>
+    <v-container class="main">
       <v-app-bar color="primary" height="40">
         <v-app-bar-nav-icon @click="drawer = true" />
+        <v-spacer />
+        <v-app-bar-nav-icon :icon="mdiReload" @click="reload" class="reload"/>
       </v-app-bar>
 
       <v-navigation-drawer v-model="drawer">
@@ -39,6 +41,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import {
+  mdiReload,
   mdiHome,
   mdiCheckerboard,
 } from '@mdi/js';
@@ -56,9 +59,16 @@ const items = ref([
     path: '/app/life-game',
   },
 ]);
+
+const reload = () => {
+  location.reload();
+};
 </script>
 
 <style scoped lang="scss">
+.main {
+  padding: 0;
+}
 .content {
   margin-top: 40px;
 }
