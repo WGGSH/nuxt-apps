@@ -1,7 +1,10 @@
 <template>
   <div>
     hoge
-    <v-btn class="btn" @click="click">
+    <v-btn
+      class="btn"
+      @click="click"
+    >
       hoge
     </v-btn>
   </div>
@@ -9,8 +12,8 @@
 
 <script setup lang="ts">
 const click = () => {
-  console.log('click')
-}
+  console.log('click');
+};
 </script>
 
 <style scoped lang="scss">
