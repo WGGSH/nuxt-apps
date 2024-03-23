@@ -34,5 +34,7 @@
     "no-console": "off",
     "comma-dangle": ["error", "always-multiline"],
     "semi": ["error", "always"],
+    "space-before-function-paren": ["error", "never"],
+    "vue/multi-word-component-names": "off"
   }
 }
