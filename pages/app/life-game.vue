@@ -1,9 +1,23 @@
 <template>
-  <div>
-    <v-icon :icon="mdiHome" />
-  </div>
+  <v-container>
+    <life-game-field :field="field" />
+  </v-container>
 </template>
 
 <script setup lang="ts">
-import { mdiHome } from '@mdi/js';
+import { computed } from 'vue';
+
+const lifeGame = useLifeGame();
+
+const field = computed(() => lifeGame.field);
+
+// const start = () => {
+//   lifeGame.start();
+// };
+
+lifeGame.start();
+
 </script>
+
+<style scoped>
+</style>

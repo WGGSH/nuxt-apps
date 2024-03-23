@@ -1,10 +1,17 @@
 <template>
   <v-app>
     <v-container class="main">
-      <v-app-bar color="primary" height="40">
+      <v-app-bar
+        color="primary"
+        height="40"
+      >
         <v-app-bar-nav-icon @click="drawer = true" />
         <v-spacer />
-        <v-app-bar-nav-icon :icon="mdiReload" @click="reload" class="reload"/>
+        <v-app-bar-nav-icon
+          :icon="mdiReload"
+          class="reload"
+          @click="reload"
+        />
       </v-app-bar>
 
       <v-navigation-drawer v-model="drawer">
@@ -18,8 +25,16 @@
 
         <v-divider />
 
-        <v-list dense nav>
-          <v-list-item v-for="item in items" :key="item.title" link :to="item.path">
+        <v-list
+          dense
+          nav
+        >
+          <v-list-item
+            v-for="item in items"
+            :key="item.title"
+            link
+            :to="item.path"
+          >
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-icon>

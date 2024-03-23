@@ -1,7 +1,10 @@
 <template>
   <div>
     hoge
-    <v-btn class="btn" @click="click">
+    <v-btn
+      class="btn"
+      @click="click"
+    >
       hoge
     </v-btn>
   </div>
