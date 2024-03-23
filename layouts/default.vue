@@ -59,6 +59,7 @@ import {
   mdiReload,
   mdiHome,
   mdiCheckerboard,
+  mdiEiffelTower,
 } from '@mdi/js';
 
 const drawer = ref(false);
@@ -69,9 +70,14 @@ const items = ref([
     path: '/',
   },
   {
-    title: 'Life Game',
+    title: 'ライフゲーム',
     icon: mdiCheckerboard,
     path: '/app/life-game',
+  },
+  {
+    title: 'ハノイの塔',
+    icon: mdiEiffelTower,
+    path: '/app/hanoi-tower',
   },
 ]);
 
