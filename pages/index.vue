@@ -9,8 +9,8 @@
 
 <script setup lang="ts">
 const click = () => {
-  console.log('click')
-}
+  console.log('click');
+};
 </script>
 
 <style scoped lang="scss">

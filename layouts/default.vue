@@ -28,6 +28,7 @@
           </v-list-item>
         </v-list>
       </v-navigation-drawer>
+
       <div class="content">
         <slot />
       </div>
@@ -36,13 +37,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-const drawer = ref(false)
+import { ref } from 'vue';
 import {
   mdiHome,
   mdiCheckerboard,
-} from '@mdi/js'
+} from '@mdi/js';
 
+const drawer = ref(false);
 const items = ref([
   {
     title: 'Home',
@@ -54,7 +55,7 @@ const items = ref([
     icon: mdiCheckerboard,
     path: '/app/life-game',
   },
-])
+]);
 </script>
 
 <style scoped lang="scss">
