@@ -1,7 +1,9 @@
 <template>
-  <div
+  <v-card
     v-if="props.field"
-    class="hoge"
+    elevation="24"
+    color="grey-darken-3"
+    class="field pa-2"
   >
     <div
       v-for="(row, y) in props.field"
@@ -12,10 +14,12 @@
         v-for="(cell, x) in row"
         :key="x"
         class="cell"
-        :color="cell ? 'primary' : 'grey'"
+        flat
+        :color="cell ? 'primary' : 'white'"
+        @click="clickCell(y, x)"
       />
     </div>
-  </div>
+  </v-card>
 </template>
 
 <script setup lang="ts">
@@ -24,22 +28,32 @@ const props = defineProps<{
 }>();
 
 const size = computed(() => props.field?.length ?? 0);
+
+const emits = defineEmits<{
+  onClickCell:(y: number, x: number) => void
+}>();
+
+const clickCell = (y: number, x: number) => {
+  emits('onClickCell', y, x);
+};
 </script>
 
 <style scoped lang="scss">
-.hoge {
-  background: red;
-}
+.field {
+  >.row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 
-.cell {
-  width: calc(100% / v-bind(size));
-  min-width: 0 !important;
-  padding-top: calc(100% / v-bind(size));
-  background: white;
-}
-
-.row {
-  display: flex;
-  width: 100%;
+    > .cell {
+      width: calc(100% / v-bind(size));
+      min-width: 0 !important;
+      padding-top: calc(100% / v-bind(size));
+      margin: -1px;
+      background: white;
+      border: 1px solid black;
+      border-radius: 0;
+    }
+  }
 }
 </style>
