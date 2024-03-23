@@ -1,5 +1,3 @@
-import path from 'path'
-import fs from 'fs'
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config

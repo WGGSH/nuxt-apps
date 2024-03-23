@@ -1,10 +1,6 @@
 <template>
   <nuxt-layout>
-    <v-app>
-      <v-sheet>
-        <nuxt-page />
-      </v-sheet>
-    </v-app>
+    <nuxt-page />
   </nuxt-layout>
 </template>
 
