@@ -18,6 +18,3 @@ const field = computed(() => lifeGame.field);
 lifeGame.start();
 
 </script>
-
-<style scoped>
-</style>

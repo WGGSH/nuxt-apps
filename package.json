@@ -8,8 +8,10 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "lint": "eslint **/*.vue **/*.ts *.vue *.ts",
-    "lint-fix": "eslint --fix **/*.vue **/*.ts *.vue *.ts",
+    "lint": "eslint **/*.{ts,vue}",
+    "lint-fix": "eslint --fix **/*.{ts,vue}",
+    "stylelint": "stylelint '**/*.vue'",
+    "stylelint-fix": "stylelint --fix '**/*.vue'",
     "generate-pwa-assets": "pwa-assets-generator --preset minimal-2023 public/icon.svg"
   },
   "dependencies": {
@@ -29,6 +31,12 @@
     "eslint-plugin-nuxt": "^4.0.0",
     "sass": "^1.72.0",
     "sass-loader": "^14.1.1",
+    "stylelint": "^16.2.1",
+    "stylelint-config-recess-order": "^5.0.0",
+    "stylelint-config-recommended-scss": "^14.0.0",
+    "stylelint-config-recommended-vue": "^1.5.0",
+    "stylelint-config-standard": "^36.0.0",
+    "stylelint-rscss": "^0.4.0",
     "vite-plugin-vuetify": "^2.0.3",
     "vuetify": "^3.5.11"
   }

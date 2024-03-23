@@ -84,6 +84,7 @@ const reload = () => {
 .main {
   padding: 0;
 }
+
 .content {
   margin-top: 40px;
 }

@@ -28,17 +28,14 @@ const size = computed(() => props.field?.length ?? 0);
 
 <style scoped lang="scss">
 .hoge {
-  // margin: 16px;
   background: red;
-  // display: grid;
 }
 
 .cell {
-  background: white;
   width: calc(100% / v-bind(size));
+  min-width: 0 !important;
   padding-top: calc(100% / v-bind(size));
-  min-width: 0!important;
-  // height: 50px;
+  background: white;
 }
 
 .row {
