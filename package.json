@@ -8,11 +8,12 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "lint": "eslint **/*.vue",
-    "lint-fix": "eslint --fix **/*.vue",
+    "lint": "eslint **/*.vue **/*.ts *.vue *.ts",
+    "lint-fix": "eslint --fix **/*.vue **/*.ts *.vue *.ts",
     "generate-pwa-assets": "pwa-assets-generator --preset minimal-2023 public/icon.svg"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.5.1",
     "nuxt": "^3.11.1",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
