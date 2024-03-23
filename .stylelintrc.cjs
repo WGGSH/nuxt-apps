@@ -7,10 +7,8 @@ module.exports = {
     'stylelint-rscss',
   ],
   ignoreFiles: [
-    [
-      '**/*.js',
-      '**/*.ts',
-    ],
+    '**/*.js',
+    '**/*.ts',
   ],
 };
 
