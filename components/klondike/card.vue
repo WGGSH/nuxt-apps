@@ -102,10 +102,7 @@ const onClick = () => {
     display: flex;
 
     &.bottom {
-      top: auto;
-      right: 0;
-      bottom: 2px;
-      left: auto;
+      inset: auto 0 2px auto;
       transform: rotate(180deg);
     }
   }

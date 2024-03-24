@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import tynyColor from 'tinycolor2';
+import tinyColor from 'tinycolor2';
 
 const props = defineProps<{
   disk: number,
@@ -18,8 +18,10 @@ const props = defineProps<{
   height: number,
 }>();
 
+const theme = useTheme();
+
 const diskColor = computed(() => {
-  return tynyColor(vuetify.theme.current.value.colors.primary).lighten(props.disk * 5).toString();
+  return tinyColor(theme.currentTheme.colors.primary).lighten(props.disk * 5).toString();
 });
 </script>
 
