@@ -4,10 +4,15 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify';
 export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
+  runtimeConfig: {
+    baseURL: '/nuxt-apps/',
+  },
   build: {
     transpile: ['vuetify'],
   },
   app: {
+    baseURL: '/nuxt-apps/',
+    cdnURL: '/nuxt-apps/',
     head: {
       meta: [
         { name: 'theme-color', content: '#326CB3' },
