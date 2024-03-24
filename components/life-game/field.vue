@@ -2,7 +2,6 @@
   <v-card
     v-if="props.field"
     elevation="24"
-    color="grey-darken-3"
     class="field pa-2"
   >
     <div
@@ -15,7 +14,8 @@
         :key="x"
         class="cell"
         flat
-        :color="cell ? 'primary' : 'white'"
+        :color="cell ? 'primary' : 'background'"
+        :class="{ 'is-fill': cell }"
         @click="clickCell(y, x)"
       />
     </div>
@@ -51,8 +51,12 @@ const clickCell = (y: number, x: number) => {
       padding-top: calc(100% / v-bind(size));
       margin: -1px;
       background: white;
-      border: 1px solid black;
+      outline: 5px solid;
       border-radius: 0;
+
+      &.is-fill {
+        outline: 5px solid rgb(var(--v-theme-on-surface));
+      }
     }
   }
 }

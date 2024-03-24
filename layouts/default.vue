@@ -67,7 +67,7 @@ import {
 } from '@mdi/js';
 
 const theme = useTheme();
-const currentTheme = computed(() => theme.theme);
+const currentTheme = computed(() => theme.themeName);
 
 const drawer = ref(false);
 const items = ref([

@@ -1,14 +1,21 @@
+import type { ThemeDefinition } from 'vuetify';
+
 export const useTheme = defineStore('useTheme', {
   state: () => ({
-    theme: 'light',
+    themeName: 'light',
   }),
+  getters: {
+    currentTheme(): ThemeDefinition {
+      return vuetify.theme.computedThemes.value[this.themeName];
+    },
+  },
   actions: {
     fetchByLocalStorage() {
-      this.theme = localStorage.getItem('theme') || 'light';
+      this.themeName = localStorage.getItem('theme') || 'light';
     },
     toggleTheme() {
-      this.theme = this.theme === 'light' ? 'dark' : 'light';
-      localStorage.setItem('theme', this.theme);
+      this.themeName = this.themeName === 'light' ? 'dark' : 'light';
+      localStorage.setItem('theme', this.themeName);
     },
   },
 });
