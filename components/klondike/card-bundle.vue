@@ -8,12 +8,12 @@
         v-for="(card, index) in props.bundle"
         :key="card.id"
         :card="card"
-        :is-face-up="index === props.bundle.length - 1"
         class="cardeee"
         :elevation="index === props.bundle.length - 1 ? 10 : 0"
         :style="{
-          top: `${index * 0.5}rem`,
+          top: `${index * 1.0}rem`,
         }"
+        @click="onClickCard(card)"
       />
     </div>
     <div
@@ -23,6 +23,7 @@
       <klondike-card
         :card="null"
         :is-face-up="false"
+        @click="onClickCard(null)"
       />
     </div>
   </div>
@@ -35,12 +36,20 @@ const props = defineProps<{
   bundle: Card[];
 }>();
 
+const emit = defineEmits<{
+  click:(card: Card) => void;
+}>();
+
+const onClickCard = (card: Card) => {
+  emit('click', card);
+};
+
 </script>
 
 <style scoped lang="scss">
 .card-bundle {
   position: relative;
-  height: 150px;
+  height: 350px;
 
   .cardeee {
     position: absolute;

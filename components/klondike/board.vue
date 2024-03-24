@@ -7,13 +7,13 @@
           v-if="props.deck.length"
           :card="props.deck[props.deck.length - 1]"
           :is-face-up="false"
-          @click="onDeckClick"
+          @click="onClickDeck"
         />
         <klondike-card
           v-else
           :card="null"
           :is-face-up="false"
-          @click="onEmptyDeckClick"
+          @click="onClickEmptyDeck"
         />
       </div>
 
@@ -23,32 +23,30 @@
           v-if="props.wastes.length"
           :card="props.wastes[props.wastes.length - 1]"
           :is-face-up="true"
-          @click="onWasteClick"
+          @click="onClickWaste"
         />
         <klondike-card
           v-else
           :card="null"
           :is-face-up="false"
-          @click="onEmptyWasteClick"
         />
       </div>
 
       <!-- Piles -->
       <div
         v-for="(pile, index) in props.piles"
+        :key="index"
         class="col"
       >
         <klondike-card
           v-if="pile.length"
           :card="pile[pile.length - 1]"
-          :is-face-up="true"
-          @click="() => onPileClick(pile)"
+          @click="onClickPile(index)"
         />
         <klondike-card
           v-else
           :card="null"
-          :is-face-up="false"
-          @click="() => onEmptyPileClick(pile)"
+          @click="onClickPile(index)"
         />
       </div>
     </div>
@@ -61,19 +59,8 @@
       >
         <klondike-card-bundle
           :bundle="field"
+          @click="onClickBundleCard($event, index)"
         />
-        <!-- <klondike-card -->
-        <!--   v-if="field.length" -->
-        <!--   :card="field[field.length - 1]" -->
-        <!--   :is-face-up="field[field.length - 1].isFaceUp" -->
-        <!--   @click="() => onFieldClick(field)" -->
-        <!-- /> -->
-        <!-- <klondike-card -->
-        <!--   v-else -->
-        <!--   :card="null" -->
-        <!--   :is-face-up="false" -->
-        <!--   @click="() => onEmptyFieldClick(field)" -->
-        <!-- /> -->
       </div>
     </div>
   </div>
@@ -90,17 +77,33 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  deckClick:(card: Card) => void;
-  emptyDeckClick: () => void;
+  clickDeck:(card: Card) => void;
+  clickEmptyDeck: () => void;
+  clickPile:(index: number) => void;
+  clickBundle:(index: number) => void;
+  clickWaste: () => void;
 }>();
 
-const onDeckClick = () => {
-  emit('deckClick');
+const onClickDeck = () => {
+  emit('clickDeck');
 };
 
-const onEmptyDeckClick = () => {
-  emit('emptyDeckClick');
+const onClickEmptyDeck = () => {
+  emit('clickEmptyDeck');
 };
+
+const onClickWaste = () => {
+  emit('clickWaste');
+};
+
+const onClickPile = (index: number) => {
+  emit('clickPile', index);
+};
+
+const onClickBundleCard = (card: Card, index: number) => {
+  emit('clickBundleCard', card, index);
+};
+
 </script>
 
 <style scoped lang="scss">

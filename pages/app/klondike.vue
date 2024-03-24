@@ -5,9 +5,16 @@
       :fields="fields"
       :wastes="wastes"
       :piles="piles"
-      @deck-click="klondike.draw"
-      @empty-deck-click="klondike.resetDeck"
+      @click-deck="klondike.draw"
+      @click-empty-deck="klondike.resetDeck"
+      @click-pile="klondike.selectPile"
+      @click-waste="klondike.selectWaste"
+      @click-bundle-card="klondike.selectField"
     />
+    {{ klondike.isSelectedField }}
+    {{ klondike.isSelectedWaste }}
+    {{ klondike.selectedFieldIndex }}
+    {{ klondike.selectedCard }}
   </v-container>
 </template>
 

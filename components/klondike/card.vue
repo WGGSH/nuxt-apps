@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card
-      v-if="props.card && props.isFaceUp"
+      v-if="props.card && props.card.isFaceUp"
       width="100%"
       class="card"
       :elevation="props.elevation || 24"
@@ -20,7 +20,7 @@
       </div>
     </v-card>
     <v-card
-      v-else-if="props.card && !props.isFaceUp"
+      v-else-if="props.card && !props.card.isFaceUp"
       width="100%"
       class="card is-face-down"
       :elevation="props.elevation || 24"
@@ -56,7 +56,6 @@ const suitSymbol = computed(() => {
 
 const props = defineProps<{
   card: Card | null;
-  isFaceUp: boolean;
   elevation?: number;
 }>();
 
@@ -76,14 +75,14 @@ const onClick = () => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: white;
-  border-radius: 4px;
-  border: 2px solid black;
-  color: black;
+  padding-top: 140%;
   font-size: 20px;
   font-weight: bold;
+  color: black;
   text-align: center;
-  padding-top: 140%;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 4px;
 
   .text {
     position: absolute;
