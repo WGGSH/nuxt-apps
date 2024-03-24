@@ -1,11 +1,17 @@
 export const useHanoiTower = defineStore('useHanoiTower', {
   state: () => ({
     towers: [] as number[][],
-    diskCount: 4,
+    diskCount: 3,
     selectedDisk: null as number | null,
   }),
+  getters: {
+    isClear(): boolean {
+      return this.towers[2].length === this.diskCount;
+    },
+  },
   actions: {
-    start() {
+    start(diskCount: number) {
+      this.diskCount = diskCount;
       this.towers = [
         Array.from({ length: this.diskCount }, (_, i) => i + 1),
         [],

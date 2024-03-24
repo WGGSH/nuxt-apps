@@ -5,15 +5,16 @@
       :key="tower"
       class="tower ma-2"
       :style="{
-        height: `calc(${props.diskCount + 1} * ${DISK_SIZE}px)`
+        height: `calc(${props.diskCount + 1} * ${props.diskSize}px)`
       }"
       @click="clickTower(index)"
     >
-      <div
+      <v-card
         class="pole"
         :class="{ 'is-goal': index === towers.length - 1 }"
+        :color="index === towers.length - 1 ? 'primary' : 'grey'"
         :style="{
-          width: `calc(${DISK_SIZE}px / 2)`
+          width: `calc(${props.diskSize}px / 2)`
         }"
       />
       <div class="disk-margin" />
@@ -22,20 +23,22 @@
         v-for="disk in tower"
         :key="disk"
         :disk="disk"
-        :width="disk * DISK_SIZE"
-        :height="DISK_SIZE"
+        :width="(disk + 1) * diskSize"
+        :height="diskSize"
       />
     </v-card>
   </div>
 </template>
 
 <script setup lang="ts">
-const DISK_SIZE = 25;
 
 const props = defineProps<{
   towers: number[][],
   diskCount: number,
+  diskSize: number,
 }>();
+
+const diskSize = computed(() => props.diskSize);
 
 const emit = defineEmits<{
   onClickTower:(index: number) => void,
@@ -59,15 +62,13 @@ const clickTower = (index: number) => {
     align-items: center;
     width: calc(100% / 3);
     text-align: center;
-    background-color: #f0f0f0;
 
     >.pole {
       position: absolute;
       height: 100%;
-      background-color: black;
 
       &.is-goal {
-        background-color: red;
+        background-color: rgb(var(--v-theme-secondary));
       }
     }
 
