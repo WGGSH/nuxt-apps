@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app :theme="currentTheme">
     <v-container class="main">
       <v-app-bar
         color="primary"
@@ -11,6 +11,12 @@
           :icon="mdiReload"
           class="reload"
           @click="reload"
+        />
+
+        <v-app-bar-nav-icon
+          :icon="themeIcon"
+          class="theme-toggle"
+          @click="toggleTheme"
         />
       </v-app-bar>
 
@@ -56,7 +62,12 @@ import {
   mdiCheckerboard,
   mdiEiffelTower,
   mdiCardsPlayingClubMultipleOutline,
+  mdiWeatherSunny,
+  mdiWeatherNight,
 } from '@mdi/js';
+
+const theme = useTheme();
+const currentTheme = computed(() => theme.theme);
 
 const drawer = ref(false);
 const items = ref([
@@ -82,9 +93,19 @@ const items = ref([
   },
 ]);
 
+const themeIcon = computed(() => {
+  return theme.theme === 'light' ? mdiWeatherNight : mdiWeatherSunny;
+});
+
 const reload = () => {
   location.reload();
 };
+
+const toggleTheme = () => {
+  theme.toggleTheme();
+};
+
+theme.fetchByLocalStorage();
 </script>
 
 <style scoped lang="scss">
