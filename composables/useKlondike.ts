@@ -30,7 +30,7 @@ export const useKlondike = defineStore('useKlondike', {
       });
 
       // shuffle
-      // this.deck.sort(() => Math.random() - 0.5);
+      this.deck.sort(() => Math.random() - 0.5);
 
       // deal
       this.fields = Array.from({ length: 7 }, (_, i) => {
@@ -71,7 +71,10 @@ export const useKlondike = defineStore('useKlondike', {
         return;
       }
 
-      this.resetSelected();
+      this.isSelectedWaste = true;
+      this.isSelectedField = false;
+      this.selectedFieldIndex = -1;
+      this.selectedCard = null;
     },
     selectField(card: Card, index: number) {
       // カードの選択状態によって挙動を変更

@@ -7,6 +7,7 @@
       :elevation="props.elevation || 24"
       :class="{
         'color-red': props.card.suit === 'Hearts' || props.card.suit === 'Diamonds',
+        'is-selected': props.isSelected || false,
       }"
       @click="onClick"
     >
@@ -16,6 +17,15 @@
         </v-card-text>
         <v-card-text class="pa-0">
           {{ props.card.rank }}
+        </v-card-text>
+      </div>
+
+      <div class="text bottom">
+        <v-card-text class="pa-0">
+          {{ props.card.rank }}
+        </v-card-text>
+        <v-card-text class="pa-0">
+          {{ suitSymbol }}
         </v-card-text>
       </div>
     </v-card>
@@ -57,6 +67,7 @@ const suitSymbol = computed(() => {
 const props = defineProps<{
   card: Card | null;
   elevation?: number;
+  isSelected?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -82,11 +93,21 @@ const onClick = () => {
   text-align: center;
   background-color: white;
   border: 2px solid black;
-  border-radius: 4px;
+  border-radius: 8px;
 
   .text {
     position: absolute;
-    top: 0;
+    top: -2px;
+    left: 0;
+    display: flex;
+
+    &.bottom {
+      top: auto;
+      right: 0;
+      bottom: 2px;
+      left: auto;
+      transform: rotate(180deg);
+    }
   }
 
   &.color-red {
@@ -99,6 +120,10 @@ const onClick = () => {
 
   &.is-null {
     background-color: transparent;
+  }
+
+  &.is-selected {
+    outline: 4px solid rgb(var(--v-theme-accent));
   }
 }
 </style>

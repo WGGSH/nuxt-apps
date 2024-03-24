@@ -23,6 +23,7 @@
           v-if="props.wastes.length"
           :card="props.wastes[props.wastes.length - 1]"
           :is-face-up="true"
+          :is-selected="props.isSelectedWaste"
           @click="onClickWaste"
         />
         <klondike-card
@@ -59,6 +60,8 @@
       >
         <klondike-card-bundle
           :bundle="field"
+          :is-selected="props.isSelectedField && props.selectedFieldIndex === index"
+          :selected-card="props.selectedCard"
           @click="onClickBundleCard($event, index)"
         />
       </div>
@@ -74,6 +77,10 @@ const props = defineProps<{
   fields: Card[][];
   wastes: Card[];
   piles: Card[][];
+  isSelectedField: boolean;
+  isSelectedWaste: boolean;
+  selectedFieldIndex: number;
+  selectedCard: Card | null;
 }>();
 
 const emit = defineEmits<{

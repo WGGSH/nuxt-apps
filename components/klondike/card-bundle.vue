@@ -8,7 +8,8 @@
         v-for="(card, index) in props.bundle"
         :key="card.id"
         :card="card"
-        class="cardeee"
+        :is-selected="props.isSelected && props.selectedCard === card"
+        class="klondike-card"
         :elevation="index === props.bundle.length - 1 ? 10 : 0"
         :style="{
           top: `${index * 1.0}rem`,
@@ -34,6 +35,8 @@ import type { Card } from '~/types/klondike';
 
 const props = defineProps<{
   bundle: Card[];
+  isSelected: boolean;
+  selectedCard: Card | null;
 }>();
 
 const emit = defineEmits<{
@@ -51,7 +54,7 @@ const onClickCard = (card: Card) => {
   position: relative;
   height: 350px;
 
-  .cardeee {
+  .klondike-card {
     position: absolute;
     width: 100%;
     height: 100%;
