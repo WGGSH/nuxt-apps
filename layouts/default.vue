@@ -16,11 +16,9 @@
 
       <v-navigation-drawer v-model="drawer">
         <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title class="text-h6">
-              Application
-            </v-list-item-title>
-          </v-list-item-content>
+          <v-list-item-title class="text-h6">
+            Application
+          </v-list-item-title>
         </v-list-item>
 
         <v-divider />
@@ -35,13 +33,10 @@
             link
             :to="item.path"
           >
-            <v-list-item-icon>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-icon>
-
-            <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
+            <v-icon :icon="item.icon"/>
+            <v-list-item-title>
+              {{ item.title }}
+            </v-list-item-title>
           </v-list-item>
         </v-list>
       </v-navigation-drawer>

@@ -29,8 +29,8 @@
         <v-number-input
           v-model="modelDiskCount"
           label="Disk Count"
-          min="3"
-          max="10"
+          :min="3"
+          :max="10"
           width="200"
           control-variant="split"
         />
