@@ -51,8 +51,8 @@ const clickCell = (y: number, x: number) => {
       padding-top: calc(100% / v-bind(size));
       margin: -1px;
       background: white;
-      outline: 5px solid;
       border-radius: 0;
+      outline: 5px solid;
 
       &.is-fill {
         outline: 5px solid rgb(var(--v-theme-on-surface));

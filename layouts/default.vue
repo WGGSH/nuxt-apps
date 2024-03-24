@@ -94,7 +94,7 @@ const items = ref([
 ]);
 
 const themeIcon = computed(() => {
-  return theme.theme === 'light' ? mdiWeatherNight : mdiWeatherSunny;
+  return theme.themeName === 'light' ? mdiWeatherNight : mdiWeatherSunny;
 });
 
 const reload = () => {
