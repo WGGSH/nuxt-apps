@@ -33,7 +33,7 @@
             link
             :to="item.path"
           >
-            <v-icon :icon="item.icon"/>
+            <v-icon :icon="item.icon" />
             <v-list-item-title>
               {{ item.title }}
             </v-list-item-title>
@@ -55,6 +55,7 @@ import {
   mdiHome,
   mdiCheckerboard,
   mdiEiffelTower,
+  mdiCardsPlayingClubMultipleOutline,
 } from '@mdi/js';
 
 const drawer = ref(false);
@@ -73,6 +74,11 @@ const items = ref([
     title: 'ハノイの塔',
     icon: mdiEiffelTower,
     path: '/app/hanoi-tower',
+  },
+  {
+    title: 'ソリティア',
+    icon: mdiCardsPlayingClubMultipleOutline,
+    path: '/app/klondike',
   },
 ]);
 
