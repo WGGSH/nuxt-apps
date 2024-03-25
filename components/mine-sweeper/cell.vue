@@ -1,22 +1,38 @@
 <template>
   <v-card
     v-hold:500="onHold"
-    class="card"
+    class="cell"
     @click="onClick"
   >
-    <div class="text">
-      {{ props.cell.isMine }}
-      {{ props.cell.status }}
-      {{ props.cell.mineCount }}
+    <div v-if="status === 'hidden'" class="icon"/>
+    <div v-else-if="status === 'flagged'" class="icon">
+      <v-icon>mdi-flag</v-icon>
+    </div>
+    <div v-else-if="status === 'revealed'" class="icon">
+      <div v-if="isMine">
+        <v-icon>mdi-bomb</v-icon>
+      </div>
+      <div v-else-if="mineCount > 0">
+        {{ mineCount }}
+      </div>
     </div>
   </v-card>
 </template>
 
 <script setup lang="ts">
 import type { Cell } from '~/types/mine-sweeper';
+import {
+  mdiBomb,
+  mdiFlag,
+} from '@mdi/js';
+
 const props = defineProps<{
   cell: Cell
 }>();
+
+const isMine = computed(() => props.cell.isMine);
+const status = computed(() => props.cell.status);
+const mineCount = computed(() => props.cell.mineCount);
 
 const emit = defineEmits<{
   click:() => void
@@ -34,14 +50,14 @@ const onHold = () => {
 </script>
 
 <style scoped lang="scss">
-.card {
+.cell {
   width: 100%;
   padding-top: 100%;
   border: 1px solid rgb(var(--v-theme-on-background));
 
-  >.text {
+  >.icon {
     position: absolute;
-    font-size: 8px;
+    font-size: 100%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

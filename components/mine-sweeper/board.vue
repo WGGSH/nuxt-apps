@@ -13,7 +13,11 @@
         :key="x"
         class="col"
       >
-        <mine-sweeper-cell :cell="cell" />
+        <mine-sweeper-cell
+          :cell="cell"
+          @click="onClickCell(y, x)"
+          @hold="onHoldCell(y, x)"
+        />
       </div>
     </div>
   </v-container>
@@ -28,6 +32,19 @@ const theme = useTheme();
 const props = defineProps<{
   field: Cell[][]
 }>();
+
+const emit = defineEmits<{
+  clickCell:(y: number, x: number) => void
+  holdCell:(y: number, x: number) => void
+}>();
+
+const onClickCell = (y: number, x: number) => {
+  emit('clickCell', y, x);
+};
+
+const onHoldCell = (y: number, x: number) => {
+  emit('holdCell', y, x);
+};
 
 const backgroundColor = computed(() => {
   if (theme.currentTheme.dark) {
