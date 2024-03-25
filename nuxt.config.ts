@@ -29,6 +29,7 @@ export default defineNuxtConfig({
     },
   },
   plugins: [
+    '~/plugins/directives/hold.ts',
     '~/plugins/vuetify.ts',
   ],
   modules: [
