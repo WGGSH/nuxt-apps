@@ -3,12 +3,25 @@ import type { Cell } from '~/types/mine-sweeper';
 export const useMineSweeper = defineStore('useMineSweeper', {
   state: () => ({
     field: [] as Cell[][],
-    fieldSize: 8,
-    mineCount: 10,
+    fieldSize: 12,
+    mineCount: 40,
     isGameOver: false,
+    isFirstClick: true,
   }),
   actions: {
-    start() {
+    initialize() {
+      this.field = Array.from({ length: this.fieldSize }, () =>
+        Array.from({ length: this.fieldSize }, () => ({
+          isMine: false,
+          status: 'hidden',
+          mineCount: 0,
+        })),
+      );
+
+      this.isGameOver = false;
+      this.isFirstClick = true;
+    },
+    start(y: number, x: number) {
       // 盤面作成
       this.field = Array.from({ length: this.fieldSize }, () =>
         Array.from({ length: this.fieldSize }, () => ({
@@ -19,13 +32,18 @@ export const useMineSweeper = defineStore('useMineSweeper', {
       );
 
       // 地雷設置
+      // 最初にクリックしたセルの周囲に地雷を設置しない
       for (let i = 0; i < this.mineCount; i++) {
-        let x, y;
+        let px, py;
         do {
-          x = Math.floor(Math.random() * this.fieldSize);
-          y = Math.floor(Math.random() * this.fieldSize);
-        } while (this.field[y][x].isMine);
-        this.field[y][x].isMine = true;
+          px = Math.floor(Math.random() * this.fieldSize);
+          py = Math.floor(Math.random() * this.fieldSize);
+        } while (
+          (px === x && py === y) ||
+          this.field[py][px].isMine ||
+          (Math.abs(px - x) <= 1 && Math.abs(py - y) <= 1)
+        );
+        this.field[py][px].isMine = true;
       }
 
       // 周囲の地雷数を計算
@@ -36,6 +54,7 @@ export const useMineSweeper = defineStore('useMineSweeper', {
       );
 
       this.isGameOver = false;
+      this.isFirstClick = false;
     },
     getMineCount(y: number, x: number) {
       let count = 0;
@@ -54,6 +73,10 @@ export const useMineSweeper = defineStore('useMineSweeper', {
       return count;
     },
     clickCell(y: number, x: number) {
+      if (this.isGameOver) {
+        return;
+      }
+
       if (this.field[y][x].status === 'revealed') {
         this.revealNeighbors(y, x);
         return;
@@ -61,6 +84,14 @@ export const useMineSweeper = defineStore('useMineSweeper', {
 
       if (this.field[y][x].isMine) {
         this.isGameOver = true;
+        // すべての地雷を表示
+        this.field.forEach(row =>
+          row.forEach((cell) => {
+            if (cell.isMine) {
+              cell.status = 'revealed';
+            }
+          }),
+        );
         return;
       }
 

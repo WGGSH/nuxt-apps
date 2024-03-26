@@ -2,7 +2,7 @@
   <v-container class="board">
     <mine-sweeper-board
       :field="mineSweeper.field"
-      @click-cell="mineSweeper.clickCell"
+      @click-cell="onClickCell"
       @hold-cell="mineSweeper.holdCell"
     />
 
@@ -15,5 +15,12 @@
 <script setup lang="ts">
 const mineSweeper = useMineSweeper();
 
-mineSweeper.start();
+mineSweeper.initialize();
+
+const onClickCell = (y, x) => {
+  if (mineSweeper.isFirstClick) {
+    mineSweeper.start(y, x);
+  }
+  mineSweeper.clickCell(y, x);
+};
 </script>
