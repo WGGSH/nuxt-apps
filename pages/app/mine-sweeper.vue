@@ -6,14 +6,25 @@
       @hold-cell="mineSweeper.holdCell"
     />
 
+    <div>
+      {{ lastMineCount }} / {{ totalMineCount }}
+    </div>
+
     <div v-if="mineSweeper.isGameOver">
       Game Over
     </div>
+
+
+    <v-btn @click="mineSweeper.initialize">
+      Restart
+    </v-btn>
   </v-container>
 </template>
 
 <script setup lang="ts">
 const mineSweeper = useMineSweeper();
+const totalMineCount = computed(() => mineSweeper.mineCount);
+const lastMineCount = computed(() => mineSweeper.lastMineCount);
 
 mineSweeper.initialize();
 

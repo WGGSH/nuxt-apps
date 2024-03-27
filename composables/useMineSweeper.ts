@@ -3,11 +3,16 @@ import type { Cell } from '~/types/mine-sweeper';
 export const useMineSweeper = defineStore('useMineSweeper', {
   state: () => ({
     field: [] as Cell[][],
-    fieldSize: 12,
-    mineCount: 40,
+    fieldSize: 16,
+    mineCount: 10,
     isGameOver: false,
     isFirstClick: true,
   }),
+  getters: {
+    lastMineCount(): number {
+      return this.mineCount - this.field.flat().filter(cell => cell.status === 'flagged').length;
+    },
+  },
   actions: {
     initialize() {
       this.field = Array.from({ length: this.fieldSize }, () =>
@@ -23,12 +28,12 @@ export const useMineSweeper = defineStore('useMineSweeper', {
     },
     start(y: number, x: number) {
       // 盤面作成
-      this.field = Array.from({ length: this.fieldSize }, () =>
-        Array.from({ length: this.fieldSize }, () => ({
-          isMine: false,
-          status: 'hidden',
-          mineCount: 0,
-        })),
+      this.field.forEach(row =>
+        row.forEach((cell) => {
+          cell.isMine = false;
+          // cell.status = 'hidden';
+          cell.mineCount = 0;
+        }),
       );
 
       // 地雷設置
@@ -82,6 +87,11 @@ export const useMineSweeper = defineStore('useMineSweeper', {
         return;
       }
 
+      if (this.field[y][x].status === 'flagged') {
+        this.field[y][x].status = 'hidden';
+        return;
+      }
+
       if (this.field[y][x].isMine) {
         this.isGameOver = true;
         // すべての地雷を表示
@@ -97,9 +107,21 @@ export const useMineSweeper = defineStore('useMineSweeper', {
 
       this.revealNeighbors(y, x);
     },
+
     holdCell(y: number, x: number) {
-      console.log(y, x);
+      if (this.isGameOver) {
+        return;
+      }
+      if (this.field[y][x].status === 'revealed') {
+        return;
+      }
+      if (this.field[y][x].status === 'flagged') {
+        this.field[y][x].status = 'hidden';
+        return;
+      }
+      this.field[y][x].status = 'flagged';
     },
+
     revealNeighbors(y: number, x: number) {
       // 周囲の地雷数が0のセルを再帰的に開く
       const cell = this.field[y][x];
@@ -125,20 +147,6 @@ export const useMineSweeper = defineStore('useMineSweeper', {
           this.revealNeighbors(ny, nx);
         }
       }
-
-      // if (y > 0) {
-      //   this.revealNeighbors(y - 1, x);
-      // }
-      // if (y < this.fieldSize - 1) {
-      //   this.revealNeighbors(y + 1, x);
-      // }
-      //
-      // if (x > 0) {
-      //   this.revealNeighbors(y, x - 1);
-      // }
-      // if (x < this.fieldSize - 1) {
-      //   this.revealNeighbors(y, x + 1);
-      // }
     },
   },
 });
