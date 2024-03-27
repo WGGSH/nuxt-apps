@@ -3,14 +3,20 @@ import type { Cell } from '~/types/mine-sweeper';
 export const useMineSweeper = defineStore('useMineSweeper', {
   state: () => ({
     field: [] as Cell[][],
-    fieldSize: 16,
-    mineCount: 10,
+    fieldSize: 10,
+    mineCount: 30,
     isGameOver: false,
     isFirstClick: true,
   }),
   getters: {
     lastMineCount(): number {
       return this.mineCount - this.field.flat().filter(cell => cell.status === 'flagged').length;
+    },
+    isGameClear(): boolean {
+      return (
+        // 地雷以外のマスがすべて開かれるとクリア
+        this.field.flat().filter(cell => !cell.isMine && cell.status === 'revealed').length === this.fieldSize ** 2 - this.mineCount
+      );
     },
   },
   actions: {
@@ -78,12 +84,7 @@ export const useMineSweeper = defineStore('useMineSweeper', {
       return count;
     },
     clickCell(y: number, x: number) {
-      if (this.isGameOver) {
-        return;
-      }
-
-      if (this.field[y][x].status === 'revealed') {
-        this.revealNeighbors(y, x);
+      if (this.isGameOver || this.isFirstClick) {
         return;
       }
 
@@ -105,11 +106,53 @@ export const useMineSweeper = defineStore('useMineSweeper', {
         return;
       }
 
+      if (this.field[y][x].status === 'revealed') {
+        if (this.field[y][x].mineCount === this.getNeighborFlags(y, x)) {
+          for (let dy = -1; dy <= 1; dy++) {
+            for (let dx = -1; dx <= 1; dx++) {
+              const ny = y + dy;
+              const nx = x + dx;
+              if (ny < 0 || ny >= this.fieldSize || nx < 0 || nx >= this.fieldSize) {
+                continue;
+              }
+              if (ny === y && nx === x) {
+                continue;
+              }
+              if (this.field[ny][nx].status === 'hidden') {
+                this.clickCell(ny, nx);
+              }
+            }
+          }
+
+          return;
+        }
+      }
+
       this.revealNeighbors(y, x);
     },
 
+    getNeighborFlags(y: number, x: number): number {
+      let count = 0;
+      for (let dy = -1; dy <= 1; dy++) {
+        for (let dx = -1; dx <= 1; dx++) {
+          const ny = y + dy;
+          const nx = x + dx;
+          if (ny < 0 || ny >= this.fieldSize || nx < 0 || nx >= this.fieldSize) {
+            continue;
+          }
+          if (ny === y && nx === x) {
+            continue;
+          }
+          if (this.field[ny][nx].status === 'flagged') {
+            count++;
+          }
+        }
+      }
+      return count;
+    },
+
     holdCell(y: number, x: number) {
-      if (this.isGameOver) {
+      if (this.isGameOver || this.isFirstClick) {
         return;
       }
       if (this.field[y][x].status === 'revealed') {

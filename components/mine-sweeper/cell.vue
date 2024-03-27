@@ -1,14 +1,16 @@
 <template>
   <v-card v-hold:500="onHold" class="cell" :style="cellStyle" @click="onClick">
-    <div v-if="status === 'hidden'" class="icon" />
-    <div v-else-if="status === 'flagged'" class="icon">
-      <v-icon :icon="mdiFlag" />
+    <div v-if="isMine" class="icon">
+      <v-icon v-if="isGameOver || status === 'revealed'" :icon="mdiBomb" />
+      <v-icon v-else-if="isGameClear || status === 'flagged'" :icon="mdiFlag" />
     </div>
-    <div v-else-if="status === 'revealed'" class="icon" :class="{ 'is-empty': !isMine && mineCount === 0 }">
-      <v-icon v-if="isMine" :icon="mdiBomb" />
-      <div v-else-if="mineCount > 0" :style="countColor">
+    <div v-else-if="status === 'revealed'" class="icon" :class="{ 'is-empty': mineCount === 0 }">
+      <div v-if="mineCount > 0" :style="countColor">
         {{ mineCount }}
       </div>
+    </div>
+    <div v-else-if="status === 'flagged'" class="icon">
+      <v-icon :icon="mdiFlag" />
     </div>
   </v-card>
 </template>
@@ -23,7 +25,9 @@ import {
 import type { Cell } from '~/types/mine-sweeper';
 
 const props = defineProps<{
-  cell: Cell
+  cell: Cell,
+  isGameOver: boolean,
+  isGameClear: boolean,
 }>();
 
 const isMine = computed(() => props.cell.isMine);

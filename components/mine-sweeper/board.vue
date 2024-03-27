@@ -15,6 +15,8 @@
       >
         <mine-sweeper-cell
           :cell="cell"
+          :is-game-over="props.isGameOver"
+          :is-game-clear="props.isGameClear"
           @click="onClickCell(y, x)"
           @hold="onHoldCell(y, x)"
         />
@@ -30,7 +32,9 @@ import type { Cell } from '~/types/mine-sweeper';
 const theme = useTheme();
 
 const props = defineProps<{
-  field: Cell[][]
+  field: Cell[][],
+  isGameOver: boolean,
+  isGameClear: boolean,
 }>();
 
 const emit = defineEmits<{

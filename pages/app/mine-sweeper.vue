@@ -2,6 +2,8 @@
   <v-container class="board">
     <mine-sweeper-board
       :field="mineSweeper.field"
+      :is-game-over="mineSweeper.isGameOver"
+      :is-game-clear="mineSweeper.isGameClear"
       @click-cell="onClickCell"
       @hold-cell="mineSweeper.holdCell"
     />
@@ -14,6 +16,9 @@
       Game Over
     </div>
 
+    <div v-else-if="mineSweeper.isGameClear">
+      Game Clear
+    </div>
 
     <v-btn @click="mineSweeper.initialize">
       Restart
