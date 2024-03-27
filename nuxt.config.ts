@@ -23,9 +23,6 @@ export default defineNuxtConfig({
         { rel: 'icon', href: '/icon.svg', sizes: 'any', type: 'image/svg+xml' },
         { rel: 'apple-touch-icon', href: '/apple-touch-icon-180x180.png' },
       ],
-      style: [
-        { children: ':root { touch-action: manipulation; }' },
-      ],
     },
   },
   plugins: [
@@ -46,6 +43,13 @@ export default defineNuxtConfig({
     vue: {
       template: {
         transformAssetUrls,
+      },
+    },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "~/assets/css/style.scss";',
+        },
       },
     },
   },
