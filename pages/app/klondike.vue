@@ -1,6 +1,9 @@
 <template>
   <v-container class="pa-0">
-    <v-container class="board">
+    <v-container
+      class="board"
+      :style="{ 'background-color': boardColor }"
+    >
       <klondike-board
         :deck="deck"
         :fields="fields"
@@ -20,7 +23,9 @@
     <v-container>
       <v-row>
         <v-col>
-          <v-btn @click="klondike.start()">Reset</v-btn>
+          <v-btn @click="klondike.start()">
+            Reset
+          </v-btn>
         </v-col>
         <v-col>
           {{ klondike.isGameClear ? 'Game Clear!' : '' }}
@@ -31,6 +36,7 @@
 </template>
 
 <script setup lang="ts">
+import tinyColor from 'tinycolor2';
 const klondike = useKlondike();
 
 const deck = computed(() => klondike.deck);
@@ -42,11 +48,15 @@ const selectedCard = computed(() => klondike.selectedCard);
 const isSelectedField = computed(() => klondike.isSelectedField);
 const isSelectedWaste = computed(() => klondike.isSelectedWaste);
 
+const theme = useTheme();
+
+const boardColor = computed(() => {
+  if (theme.currentTheme.dark) {
+    return tinyColor(theme.currentTheme.colors.primary).darken(40).toString();
+  } else {
+    return tinyColor(theme.currentTheme.colors.primary).lighten(40).toString();
+  }
+});
+
 klondike.start();
 </script>
-
-<style scoped lang="scss">
-.board {
-  background-color: rgb(var(--v-theme-secondary));
-}
-</style>
