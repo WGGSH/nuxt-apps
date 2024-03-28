@@ -107,6 +107,7 @@ const onHold = () => {
 <style scoped lang="scss">
 .cell {
   width: 100%;
+  min-width: 30px;
   padding-top: 100%;
   border: 1px solid rgb(var(--v-theme-on-background));
 

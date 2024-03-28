@@ -3,8 +3,9 @@ import type { Cell } from '~/types/mine-sweeper';
 export const useMineSweeper = defineStore('useMineSweeper', {
   state: () => ({
     field: [] as Cell[][],
-    fieldSize: 10,
-    mineCount: 30,
+    fieldY: 5,
+    fieldX: 15,
+    mineCount: 5,
     isGameOver: false,
     isFirstClick: true,
   }),
@@ -15,14 +16,14 @@ export const useMineSweeper = defineStore('useMineSweeper', {
     isGameClear(): boolean {
       return (
         // 地雷以外のマスがすべて開かれるとクリア
-        this.field.flat().filter(cell => !cell.isMine && cell.status === 'revealed').length === this.fieldSize ** 2 - this.mineCount
+        this.field.flat().filter(cell => !cell.isMine && cell.status === 'revealed').length === this.fieldY * this.fieldX - this.mineCount
       );
     },
   },
   actions: {
     initialize() {
-      this.field = Array.from({ length: this.fieldSize }, () =>
-        Array.from({ length: this.fieldSize }, () => ({
+      this.field = Array.from({ length: this.fieldY }, () =>
+        Array.from({ length: this.fieldX }, () => ({
           isMine: false,
           status: 'hidden',
           mineCount: 0,
@@ -47,8 +48,8 @@ export const useMineSweeper = defineStore('useMineSweeper', {
       for (let i = 0; i < this.mineCount; i++) {
         let px, py;
         do {
-          px = Math.floor(Math.random() * this.fieldSize);
-          py = Math.floor(Math.random() * this.fieldSize);
+          px = Math.floor(Math.random() * this.fieldX);
+          py = Math.floor(Math.random() * this.fieldY);
         } while (
           (px === x && py === y) ||
           this.field[py][px].isMine ||
@@ -73,7 +74,7 @@ export const useMineSweeper = defineStore('useMineSweeper', {
         for (let dx = -1; dx <= 1; dx++) {
           const ny = y + dy;
           const nx = x + dx;
-          if (ny < 0 || ny >= this.fieldSize || nx < 0 || nx >= this.fieldSize) {
+          if (ny < 0 || ny >= this.fieldY || nx < 0 || nx >= this.fieldX) {
             continue;
           }
           if (this.field[ny][nx].isMine) {
@@ -112,7 +113,7 @@ export const useMineSweeper = defineStore('useMineSweeper', {
             for (let dx = -1; dx <= 1; dx++) {
               const ny = y + dy;
               const nx = x + dx;
-              if (ny < 0 || ny >= this.fieldSize || nx < 0 || nx >= this.fieldSize) {
+              if (ny < 0 || ny >= this.fieldY || nx < 0 || nx >= this.fieldX) {
                 continue;
               }
               if (ny === y && nx === x) {
@@ -137,7 +138,7 @@ export const useMineSweeper = defineStore('useMineSweeper', {
         for (let dx = -1; dx <= 1; dx++) {
           const ny = y + dy;
           const nx = x + dx;
-          if (ny < 0 || ny >= this.fieldSize || nx < 0 || nx >= this.fieldSize) {
+          if (ny < 0 || ny >= this.fieldY || nx < 0 || nx >= this.fieldX) {
             continue;
           }
           if (ny === y && nx === x) {
@@ -181,7 +182,7 @@ export const useMineSweeper = defineStore('useMineSweeper', {
         for (let dx = -1; dx <= 1; dx++) {
           const ny = y + dy;
           const nx = x + dx;
-          if (ny < 0 || ny >= this.fieldSize || nx < 0 || nx >= this.fieldSize) {
+          if (ny < 0 || ny >= this.fieldY || nx < 0 || nx >= this.fieldX) {
             continue;
           }
           if (ny === y && nx === x) {
