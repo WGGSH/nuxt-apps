@@ -1,5 +1,6 @@
 <template>
-  <v-card v-hold:500="onHold" class="cell" :style="cellStyle" @click="onClick">
+  <!-- <v-card v-hold:500="onHold" class="cell" :style="cellStyle" @click="onClick"> -->
+  <v-card class="cell" :style="cellStyle" v-click-and-hold="{ click: onClick, longPress: onHold }">
     <div v-if="isMine" class="icon">
       <v-icon v-if="isGameOver || status === 'revealed'" :icon="mdiBomb" />
       <v-icon v-else-if="isGameClear || status === 'flagged'" :icon="mdiFlag" />
@@ -106,12 +107,13 @@ const onHold = () => {
 <style scoped lang="scss">
 .cell {
   width: 100%;
+  min-width: 20px;
   padding-top: 100%;
   border: 1px solid rgb(var(--v-theme-on-background));
 
   >.icon {
     position: absolute;
-    font-size: 150%;
+    font-size: 125%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
