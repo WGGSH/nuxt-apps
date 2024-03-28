@@ -3,9 +3,9 @@ import type { Cell } from '~/types/mine-sweeper';
 export const useMineSweeper = defineStore('useMineSweeper', {
   state: () => ({
     field: [] as Cell[][],
-    fieldY: 5,
-    fieldX: 15,
-    mineCount: 5,
+    fieldY: 9,
+    fieldX: 9,
+    mineCount: 10,
     isGameOver: false,
     isFirstClick: true,
   }),
@@ -191,6 +191,13 @@ export const useMineSweeper = defineStore('useMineSweeper', {
           this.revealNeighbors(ny, nx);
         }
       }
+    },
+    setLevel(y: number, x: number, mineCount: number) {
+      this.fieldY = y;
+      this.fieldX = x;
+      this.mineCount = mineCount;
+
+      this.initialize();
     },
   },
 });

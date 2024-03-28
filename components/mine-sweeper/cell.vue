@@ -107,13 +107,13 @@ const onHold = () => {
 <style scoped lang="scss">
 .cell {
   width: 100%;
-  min-width: 30px;
+  min-width: 20px;
   padding-top: 100%;
   border: 1px solid rgb(var(--v-theme-on-background));
 
   >.icon {
     position: absolute;
-    font-size: 150%;
+    font-size: 125%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
