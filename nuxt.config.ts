@@ -27,6 +27,7 @@ export default defineNuxtConfig({
   },
   plugins: [
     '~/plugins/directives/hold.ts',
+    '~/plugins/directives/click-and-hold.ts',
     '~/plugins/vuetify.ts',
   ],
   modules: [
