@@ -64,6 +64,7 @@ import {
   mdiCardsPlayingClubMultipleOutline,
   mdiWeatherSunny,
   mdiWeatherNight,
+  mdiMine,
 } from '@mdi/js';
 
 const theme = useTheme();
@@ -90,6 +91,11 @@ const items = ref([
     title: 'ソリティア',
     icon: mdiCardsPlayingClubMultipleOutline,
     path: '/app/klondike',
+  },
+  {
+    title: 'マインスイーパー',
+    icon: mdiMine,
+    path: '/app/mine-sweeper',
   },
 ]);
 
