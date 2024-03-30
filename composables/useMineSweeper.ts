@@ -38,7 +38,6 @@ export const useMineSweeper = defineStore('useMineSweeper', {
       this.field.forEach(row =>
         row.forEach((cell) => {
           cell.isMine = false;
-          // cell.status = 'hidden';
           cell.mineCount = 0;
         }),
       );
@@ -85,7 +84,7 @@ export const useMineSweeper = defineStore('useMineSweeper', {
       return count;
     },
     clickCell(y: number, x: number) {
-      if (this.isGameOver || this.isFirstClick) {
+      if (this.isGameOver || this.isGameClear || this.isFirstClick) {
         return;
       }
 
@@ -153,7 +152,7 @@ export const useMineSweeper = defineStore('useMineSweeper', {
     },
 
     holdCell(y: number, x: number) {
-      if (this.isGameOver || this.isFirstClick) {
+      if (this.isGameOver || this.isGameClear || this.isFirstClick) {
         return;
       }
       if (this.field[y][x].status === 'revealed') {
