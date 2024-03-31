@@ -1,4 +1,5 @@
 import type { Cell } from '~/types/mine-sweeper';
+import { defineStore } from 'pinia';
 
 export const useMineSweeper = defineStore('useMineSweeper', {
   state: () => ({
