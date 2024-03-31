@@ -5,14 +5,14 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
   runtimeConfig: {
-    baseURL: '/nuxt-apps/',
+    baseURL: '/webapps/',
   },
   build: {
     transpile: ['vuetify'],
   },
   app: {
-    baseURL: '/nuxt-apps/',
-    cdnURL: '/nuxt-apps/',
+    baseURL: '/webapps/',
+    cdnURL: '/webapps/',
     head: {
       meta: [
         { name: 'theme-color', content: '#326CB3' },
@@ -65,7 +65,7 @@ export default defineNuxtConfig({
       installPrompt: true,
     },
     manifest: {
-      name: 'nuxt-apps',
+      name: 'webapps',
       description: 'description',
       theme_color: '#326CB3',
       lang: 'ja',
