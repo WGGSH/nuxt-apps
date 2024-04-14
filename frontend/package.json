@@ -6,7 +6,7 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "release": "nuxt generate && rm -r docs && cp -r .output/public docs",
+    "release": "nuxt generate && rm -r ../docs && cp -r .output/public ../docs",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint **/*.{ts,vue}",
