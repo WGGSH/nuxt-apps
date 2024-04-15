@@ -1,7 +1,11 @@
 <template>
   <div class="lights-out">
-    <lights-out-board :field="field" @on-click-cell="onClickCell"/>
-    {{ isGameClear }}
+    <lights-out-board :field="field" @on-click-cell="onClickCell" />
+    <div>
+      {{ isGameClear ? "Game Clear!" : "" }}
+    </div>
+    <div>{{ shortestCount }} / {{ clickCount }}</div>
+    <!-- {{ fastestField }} -->
   </div>
 </template>
 
@@ -9,6 +13,9 @@
 const lightsOut = useLightsOut();
 const field = computed(() => lightsOut.field);
 const isGameClear = computed(() => lightsOut.isGameClear);
+const shortestCount = computed(() => lightsOut.shortestCount);
+const clickCount = computed(() => lightsOut.clickCount);
+const fastestField = computed(() => lightsOut.fastestField);
 
 const onClickCell = (y: number, x: number) => {
   lightsOut.toggle(y, x);
