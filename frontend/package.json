@@ -13,6 +13,7 @@
     "lint-fix": "eslint --fix **/*.{ts,vue}",
     "stylelint": "stylelint '**/*.vue'",
     "stylelint-fix": "stylelint --fix '**/*.vue'",
+    "test": "vitest",
     "generate-pwa-assets": "pwa-assets-generator --preset minimal-2023 public/icon.svg"
   },
   "dependencies": {
