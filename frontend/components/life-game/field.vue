@@ -34,6 +34,7 @@ const emits = defineEmits<{
 }>();
 
 const clickCell = (y: number, x: number) => {
+  console.log(y, x);
   emits('onClickCell', y, x);
 };
 </script>
