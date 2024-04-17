@@ -7,29 +7,26 @@
         class="cell"
         :class="{ 'cell--on': cell }"
       >
-        <lights-out-cell
-          :cell="cell"
-          @click="onClickCell(y, x)"
-        />
+        <lights-out-cell :cell="cell" :answer="shortestField[y][x]" :show-answer="showAnswer" @click="onClickCell(y, x)" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-
 const props = defineProps<{
   field: boolean[][];
+  shortestField: boolean[][];
+  showAnswer: boolean;
 }>();
 
 const emits = defineEmits<{
-  onClickCell:(y: number, x: number) => void
+  onClickCell: (y: number, x: number) => void;
 }>();
 
 const onClickCell = (y: number, x: number) => {
-  emits('onClickCell', y, x);
+  emits("onClickCell", y, x);
 };
-
 </script>
 
 <style scoped lang="scss">
@@ -40,11 +37,10 @@ const onClickCell = (y: number, x: number) => {
     display: flex;
     width: 100%;
 
-    >.cell {
+    > .cell {
       flex: 1;
       // height: 50px;
     }
   }
 }
-
 </style>
