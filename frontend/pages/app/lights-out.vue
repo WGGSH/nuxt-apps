@@ -1,12 +1,14 @@
 <template>
-  <div class="lights-out">
-    <lights-out-board :field="field" @on-click-cell="onClickCell" />
+  <v-bnt class="lights-out">
+    <lights-out-board :field="field" :shortest-field="shortestField" @on-click-cell="onClickCell" :show-answer="isShowAnswer"/>
+    <v-btn @click="lightsOut.start()"> new game </v-btn>
+    <v-btn @click="lightsOut.restart()"> restart </v-btn>
+    <v-btn @click="lightsOut.showAnswer()"> answer </v-btn>
     <div>
       {{ isGameClear ? "Game Clear!" : "" }}
     </div>
     <div>{{ shortestCount }} / {{ clickCount }}</div>
-    <!-- {{ fastestField }} -->
-  </div>
+  </v-bnt>
 </template>
 
 <script setup lang="ts">
@@ -15,7 +17,8 @@ const field = computed(() => lightsOut.field);
 const isGameClear = computed(() => lightsOut.isGameClear);
 const shortestCount = computed(() => lightsOut.shortestCount);
 const clickCount = computed(() => lightsOut.clickCount);
-const fastestField = computed(() => lightsOut.fastestField);
+const shortestField = computed(() => lightsOut.shortestField);
+const isShowAnswer = computed(() => lightsOut.isShowAnswer);
 
 const onClickCell = (y: number, x: number) => {
   lightsOut.toggle(y, x);
