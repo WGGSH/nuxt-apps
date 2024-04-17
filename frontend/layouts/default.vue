@@ -62,9 +62,10 @@ import {
   mdiCheckerboard,
   mdiEiffelTower,
   mdiCardsPlayingClubMultipleOutline,
+  mdiMine,
+  mdiLightbulbOff,
   mdiWeatherSunny,
   mdiWeatherNight,
-  mdiMine,
 } from '@mdi/js';
 
 const theme = useTheme();
@@ -96,6 +97,11 @@ const items = ref([
     title: 'マインスイーパー',
     icon: mdiMine,
     path: '/app/mine-sweeper',
+  },
+  {
+    title: 'ライツアウト',
+    icon: mdiLightbulbOff,
+    path: '/app/lights-out',
   },
 ]);
 
