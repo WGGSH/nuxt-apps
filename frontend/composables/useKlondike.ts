@@ -53,7 +53,6 @@ export const useKlondike = defineStore("useKlondike", {
       this.wastes[this.wastes.length - 1].isFaceUp = true;
     },
     resetDeck() {
-      console.log(this.deck);
       this.deck.push(...this.wastes.reverse());
       this.deck.forEach((card) => {
         card.isFaceUp = false;
@@ -83,9 +82,9 @@ export const useKlondike = defineStore("useKlondike", {
       if (this.isSelectedWaste) {
         // waste -> field
         if (this.fields[index].length === 0) {
-          if (this.wastes[this.wastes.length - 1].rank === 13) {
-            this.fields[index].push(this.wastes.pop() as Card);
-          }
+          // if (this.wastes[this.wastes.length - 1].rank === 13) {
+          this.fields[index].push(this.wastes.pop() as Card);
+          // }
           this.resetSelected();
           return;
         }
@@ -113,19 +112,17 @@ export const useKlondike = defineStore("useKlondike", {
 
         // 対象のフィールドが空の場合，Kのみ移動可能
         if (this.fields[index].length === 0) {
-          if (this.selectedCard?.rank === 13) {
-            this.fields[index].push(
-              ...this.fields[this.selectedFieldIndex].splice(
-                this.fields[this.selectedFieldIndex].indexOf(
-                  this.selectedCard as Card,
-                ),
+          this.fields[index].push(
+            ...this.fields[this.selectedFieldIndex].splice(
+              this.fields[this.selectedFieldIndex].indexOf(
+                this.selectedCard as Card,
               ),
-            );
-            if (this.fields[this.selectedFieldIndex].length > 0) {
-              this.fields[this.selectedFieldIndex][
-                this.fields[this.selectedFieldIndex].length - 1
-              ].isFaceUp = true;
-            }
+            ),
+          );
+          if (this.fields[this.selectedFieldIndex].length > 0) {
+            this.fields[this.selectedFieldIndex][
+              this.fields[this.selectedFieldIndex].length - 1
+            ].isFaceUp = true;
           }
           this.resetSelected();
           return;
@@ -229,6 +226,11 @@ export const useKlondike = defineStore("useKlondike", {
           this.piles[index].push(
             this.fields[this.selectedFieldIndex].pop() as Card,
           );
+          if (this.fields[this.selectedFieldIndex].length > 0) {
+            this.fields[this.selectedFieldIndex][
+              this.fields[this.selectedFieldIndex].length - 1
+            ].isFaceUp = true;
+          }
           this.resetSelected();
         }
       }
