@@ -1,0 +1,1 @@
+import{d as o,bj as a,t as n,v as r}from"./C2T8xcnD.js";const _=o({__name:"index",setup(s){const e=a(),t=localStorage.getItem("path")||"/";return e.push(t),(c,p)=>(n(),r("div"))}});export{_ as default};
