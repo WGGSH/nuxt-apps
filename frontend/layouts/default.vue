@@ -55,7 +55,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
 import {
   mdiReload,
   mdiHome,
@@ -70,6 +71,8 @@ import {
 
 const theme = useTheme();
 const currentTheme = computed(() => theme.themeName);
+
+const router = useRouter();
 
 const drawer = ref(false);
 const items = ref([
@@ -116,6 +119,13 @@ const reload = () => {
 const toggleTheme = () => {
   theme.toggleTheme();
 };
+
+watch(router.currentRoute, () => {
+  const path = router.currentRoute.value.path;
+  if (path !== '/') {
+    localStorage.setItem('path', path);
+  }
+});
 
 theme.fetchByLocalStorage();
 </script>
