@@ -1,7 +1,7 @@
-import { SUITS } from '~/types/klondike';
-import type { Rank, Card } from '~/types/klondike';
+import { SUITS } from "~/types/klondike";
+import type { Rank, Card } from "~/types/klondike";
 
-export const useKlondike = defineStore('useKlondike', {
+export const useKlondike = defineStore("useKlondike", {
   state: () => ({
     deck: [] as Card[], // 52 cards
     fields: [] as Card[][], // 7 columns
@@ -14,14 +14,14 @@ export const useKlondike = defineStore('useKlondike', {
   }),
   getters: {
     isGameClear(): boolean {
-      return this.piles.every(pile => pile.length === 13);
+      return this.piles.every((pile) => pile.length === 13);
     },
   },
   actions: {
     start() {
       this.deck = [];
       const ranks = Array.from({ length: 13 }, (_, rank) => {
-        return rank + 1 as Rank;
+        return (rank + 1) as Rank;
       });
       SUITS.forEach((suit) => {
         ranks.forEach((rank) => {
@@ -53,7 +53,7 @@ export const useKlondike = defineStore('useKlondike', {
       this.wastes[this.wastes.length - 1].isFaceUp = true;
     },
     resetDeck() {
-      this.deck.push(...this.wastes);
+      this.deck.push(...this.wastes.reverse());
       this.deck.forEach((card) => {
         card.isFaceUp = false;
       });
@@ -82,15 +82,18 @@ export const useKlondike = defineStore('useKlondike', {
       if (this.isSelectedWaste) {
         // waste -> field
         if (this.fields[index].length === 0) {
-          if (this.wastes[this.wastes.length - 1].rank === 13) {
-            this.fields[index].push(this.wastes.pop() as Card);
-          }
+          // if (this.wastes[this.wastes.length - 1].rank === 13) {
+          this.fields[index].push(this.wastes.pop() as Card);
+          // }
           this.resetSelected();
           return;
         }
         const waste = this.wastes[this.wastes.length - 1];
         const fieldCard = this.fields[index][this.fields[index].length - 1];
-        if (this.isSuitMatch(waste, fieldCard) && waste.rank === fieldCard.rank - 1) {
+        if (
+          this.isSuitMatch(waste, fieldCard) &&
+          waste.rank === fieldCard.rank - 1
+        ) {
           this.fields[index].push(this.wastes.pop() as Card);
         } else {
           return;
@@ -109,24 +112,41 @@ export const useKlondike = defineStore('useKlondike', {
 
         // 対象のフィールドが空の場合，Kのみ移動可能
         if (this.fields[index].length === 0) {
-          if (this.selectedCard?.rank === 13) {
-            this.fields[index].push(...this.fields[this.selectedFieldIndex].splice(this.fields[this.selectedFieldIndex].indexOf(this.selectedCard as Card)));
-            if (this.fields[this.selectedFieldIndex].length > 0) {
-              this.fields[this.selectedFieldIndex][this.fields[this.selectedFieldIndex].length - 1].isFaceUp = true;
-            }
+          this.fields[index].push(
+            ...this.fields[this.selectedFieldIndex].splice(
+              this.fields[this.selectedFieldIndex].indexOf(
+                this.selectedCard as Card,
+              ),
+            ),
+          );
+          if (this.fields[this.selectedFieldIndex].length > 0) {
+            this.fields[this.selectedFieldIndex][
+              this.fields[this.selectedFieldIndex].length - 1
+            ].isFaceUp = true;
           }
           this.resetSelected();
           return;
         }
 
         const fieldCard = this.fields[index][this.fields[index].length - 1];
-        if (this.isSuitMatch(this.selectedCard as Card, fieldCard) && this.selectedCard?.rank === fieldCard.rank - 1) {
+        if (
+          this.isSuitMatch(this.selectedCard as Card, fieldCard) &&
+          this.selectedCard?.rank === fieldCard.rank - 1
+        ) {
           // マッチした場合は，選択したカード及び，それ以降のカードを移動する
-          this.fields[index].push(...this.fields[this.selectedFieldIndex].splice(this.fields[this.selectedFieldIndex].indexOf(this.selectedCard as Card)));
+          this.fields[index].push(
+            ...this.fields[this.selectedFieldIndex].splice(
+              this.fields[this.selectedFieldIndex].indexOf(
+                this.selectedCard as Card,
+              ),
+            ),
+          );
 
           // 最下段を表にする
           if (this.fields[this.selectedFieldIndex].length > 0) {
-            this.fields[this.selectedFieldIndex][this.fields[this.selectedFieldIndex].length - 1].isFaceUp = true;
+            this.fields[this.selectedFieldIndex][
+              this.fields[this.selectedFieldIndex].length - 1
+            ].isFaceUp = true;
           }
 
           // 選択状態を解除
@@ -141,7 +161,7 @@ export const useKlondike = defineStore('useKlondike', {
         return;
       }
       if (!card.isFaceUp) {
-        const card = this.fields[index].find(c => c.isFaceUp);
+        const card = this.fields[index].find((c) => c.isFaceUp);
         this.selectedCard = card || null;
       } else {
         this.selectedCard = card;
@@ -166,7 +186,10 @@ export const useKlondike = defineStore('useKlondike', {
           return;
         } else {
           const pileCard = this.piles[index][this.piles[index].length - 1];
-          if (waste.suit === pileCard.suit && waste.rank === pileCard.rank + 1) {
+          if (
+            waste.suit === pileCard.suit &&
+            waste.rank === pileCard.rank + 1
+          ) {
             this.piles[index].push(this.wastes.pop() as Card);
             this.resetSelected();
             return;
@@ -178,31 +201,45 @@ export const useKlondike = defineStore('useKlondike', {
 
       // field -> pile
       // 選択している列の一番下のカードを見る
-      const card = this.fields[this.selectedFieldIndex][this.fields[this.selectedFieldIndex].length - 1];
+      const card =
+        this.fields[this.selectedFieldIndex][
+          this.fields[this.selectedFieldIndex].length - 1
+        ];
       if (card === undefined) {
         return;
       }
       if (this.piles[index].length === 0) {
         if (card.rank === 1) {
-          this.piles[index].push(this.fields[this.selectedFieldIndex].pop() as Card);
+          this.piles[index].push(
+            this.fields[this.selectedFieldIndex].pop() as Card,
+          );
           if (this.fields[this.selectedFieldIndex].length > 0) {
-            this.fields[this.selectedFieldIndex][this.fields[this.selectedFieldIndex].length - 1].isFaceUp = true;
+            this.fields[this.selectedFieldIndex][
+              this.fields[this.selectedFieldIndex].length - 1
+            ].isFaceUp = true;
             this.resetSelected();
           }
         }
       } else {
         const pileCard = this.piles[index][this.piles[index].length - 1];
         if (card.suit === pileCard.suit && card.rank === pileCard.rank + 1) {
-          this.piles[index].push(this.fields[this.selectedFieldIndex].pop() as Card);
+          this.piles[index].push(
+            this.fields[this.selectedFieldIndex].pop() as Card,
+          );
+          if (this.fields[this.selectedFieldIndex].length > 0) {
+            this.fields[this.selectedFieldIndex][
+              this.fields[this.selectedFieldIndex].length - 1
+            ].isFaceUp = true;
+          }
           this.resetSelected();
         }
       }
     },
     isSuitMatch(card1: Card, card2: Card) {
-      if (card1.suit === 'Spades' || card1.suit === 'Clubs') {
-        return card2.suit === 'Hearts' || card2.suit === 'Diamonds';
+      if (card1.suit === "Spades" || card1.suit === "Clubs") {
+        return card2.suit === "Hearts" || card2.suit === "Diamonds";
       } else {
-        return card2.suit === 'Spades' || card2.suit === 'Clubs';
+        return card2.suit === "Spades" || card2.suit === "Clubs";
       }
     },
     resetSelected() {
