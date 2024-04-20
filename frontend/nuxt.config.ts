@@ -14,9 +14,7 @@ export default defineNuxtConfig({
     baseURL: '/webapps/',
     cdnURL: '/webapps/',
     head: {
-      meta: [
-        { name: 'theme-color', content: '#326CB3' },
-      ],
+      meta: [{ name: 'theme-color', content: '#326CB3' }],
       link: [
         { rel: 'manifest', href: 'manifest.webmanifest' },
         { rel: 'icon', href: '/favicon.ico', sizes: '48x48' },
@@ -70,7 +68,7 @@ export default defineNuxtConfig({
       theme_color: '#326CB3',
       lang: 'ja',
       short_name: 'apps',
-      start_url: '/',
+      start_url: '/webapps/',
       display: 'standalone',
       background_color: '#FFFFFF',
       icons: [
