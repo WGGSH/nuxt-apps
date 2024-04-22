@@ -1,11 +1,19 @@
 <template>
   <!-- <v-card v-hold:500="onHold" class="cell" :style="cellStyle" @click="onClick"> -->
-  <v-card class="cell" :style="cellStyle" v-click-and-hold="{ click: onClick, longPress: onHold }">
+  <v-card
+    class="cell"
+    :style="cellStyle"
+    v-click-and-hold="{ click: onClick, longPress: onHold }"
+  >
     <div v-if="isMine" class="icon">
       <v-icon v-if="isGameOver || status === 'revealed'" :icon="mdiBomb" />
       <v-icon v-else-if="isGameClear || status === 'flagged'" :icon="mdiFlag" />
     </div>
-    <div v-else-if="status === 'revealed'" class="icon" :class="{ 'is-empty': mineCount === 0 }">
+    <div
+      v-else-if="status === 'revealed'"
+      class="icon"
+      :class="{ 'is-empty': mineCount === 0 }"
+    >
       <div v-if="mineCount > 0" :style="countColor">
         {{ mineCount }}
       </div>
@@ -19,16 +27,13 @@
 <script setup lang="ts">
 import tinyColor from 'tinycolor2';
 
-import {
-  mdiBomb,
-  mdiFlag,
-} from '@mdi/js';
+import { mdiBomb, mdiFlag } from '@mdi/js';
 import type { Cell } from '~/types/mine-sweeper';
 
 const props = defineProps<{
-  cell: Cell,
-  isGameOver: boolean,
-  isGameClear: boolean,
+  cell: Cell;
+  isGameOver: boolean;
+  isGameClear: boolean;
 }>();
 
 const isMine = computed(() => props.cell.isMine);
@@ -41,11 +46,15 @@ const cellStyle = computed(() => {
   if (status.value === 'revealed' && !isMine.value && mineCount.value === 0) {
     if (theme.currentTheme.dark) {
       return {
-        backgroundColor: tinyColor(theme.currentTheme.colors.background).lighten(30).toRgbString(),
+        backgroundColor: tinyColor(theme.currentTheme.colors.background)
+          .lighten(30)
+          .toRgbString(),
       };
     } else {
       return {
-        backgroundColor: tinyColor(theme.currentTheme.colors.background).darken(50).toRgbString(),
+        backgroundColor: tinyColor(theme.currentTheme.colors.background)
+          .darken(50)
+          .toRgbString(),
       };
     }
   }
@@ -90,8 +99,8 @@ const countColor = computed(() => {
 });
 
 const emit = defineEmits<{
-  click: () => void
-  hold: () => void
+  click: () => void;
+  hold: () => void;
 }>();
 
 const onClick = () => {
@@ -101,7 +110,6 @@ const onClick = () => {
 const onHold = () => {
   emit('hold');
 };
-
 </script>
 
 <style scoped lang="scss">
@@ -111,7 +119,7 @@ const onHold = () => {
   padding-top: 100%;
   border: 1px solid rgb(var(--v-theme-on-background));
 
-  >.icon {
+  > .icon {
     position: absolute;
     font-size: 125%;
     top: 50%;

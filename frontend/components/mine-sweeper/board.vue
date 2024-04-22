@@ -1,18 +1,7 @@
 <template>
-  <v-container
-    class="board pa-4"
-    :style="{ backgroundColor: backgroundColor }"
-  >
-    <div
-      v-for="(row, y) in props.field"
-      :key="y"
-      class="row"
-    >
-      <div
-        v-for="(cell, x) in row"
-        :key="x"
-        class="col"
-      >
+  <v-container class="board pa-4" :style="{ backgroundColor: backgroundColor }">
+    <div v-for="(row, y) in props.field" :key="y" class="row">
+      <div v-for="(cell, x) in row" :key="x" class="col">
         <mine-sweeper-cell
           :cell="cell"
           :is-game-over="props.isGameOver"
@@ -32,14 +21,14 @@ import type { Cell } from '~/types/mine-sweeper';
 const theme = useTheme();
 
 const props = defineProps<{
-  field: Cell[][],
-  isGameOver: boolean,
-  isGameClear: boolean,
+  field: Cell[][];
+  isGameOver: boolean;
+  isGameClear: boolean;
 }>();
 
 const emit = defineEmits<{
-  clickCell:(y: number, x: number) => void
-  holdCell:(y: number, x: number) => void
+  clickCell: (y: number, x: number) => void;
+  holdCell: (y: number, x: number) => void;
 }>();
 
 const onClickCell = (y: number, x: number) => {
@@ -52,12 +41,15 @@ const onHoldCell = (y: number, x: number) => {
 
 const backgroundColor = computed(() => {
   if (theme.currentTheme.dark) {
-    return tinyColor(theme.currentTheme.colors.primary).darken(40).toRgbString();
+    return tinyColor(theme.currentTheme.colors.primary)
+      .darken(40)
+      .toRgbString();
   } else {
-    return tinyColor(theme.currentTheme.colors.primary).lighten(50).toRgbString();
+    return tinyColor(theme.currentTheme.colors.primary)
+      .lighten(50)
+      .toRgbString();
   }
 });
-
 </script>
 
 <style scoped lang="scss">
@@ -68,7 +60,7 @@ const backgroundColor = computed(() => {
     display: flex;
     width: 100%;
 
-    >.col {
+    > .col {
       flex: 1;
       // height: 50px;
     }

@@ -1,17 +1,10 @@
 <template>
   <v-app :theme="currentTheme">
     <v-container class="main">
-      <v-app-bar
-        color="primary"
-        height="40"
-      >
+      <v-app-bar color="primary" height="40">
         <v-app-bar-nav-icon @click="drawer = true" />
         <v-spacer />
-        <v-app-bar-nav-icon
-          :icon="mdiReload"
-          class="reload"
-          @click="reload"
-        />
+        <v-app-bar-nav-icon :icon="mdiReload" class="reload" @click="reload" />
 
         <v-app-bar-nav-icon
           :icon="themeIcon"
@@ -22,17 +15,12 @@
 
       <v-navigation-drawer v-model="drawer">
         <v-list-item>
-          <v-list-item-title class="text-h6">
-            Application
-          </v-list-item-title>
+          <v-list-item-title class="text-h6"> Application </v-list-item-title>
         </v-list-item>
 
         <v-divider />
 
-        <v-list
-          dense
-          nav
-        >
+        <v-list dense nav>
           <v-list-item
             v-for="item in items"
             :key="item.title"

@@ -13,15 +13,17 @@
 import tinyColor from 'tinycolor2';
 
 const props = defineProps<{
-  disk: number,
-  width: number,
-  height: number,
+  disk: number;
+  width: number;
+  height: number;
 }>();
 
 const theme = useTheme();
 
 const diskColor = computed(() => {
-  return tinyColor(theme.currentTheme.colors.primary).lighten(props.disk * 5).toString();
+  return tinyColor(theme.currentTheme.colors.primary)
+    .lighten(props.disk * 5)
+    .toString();
 });
 </script>
 

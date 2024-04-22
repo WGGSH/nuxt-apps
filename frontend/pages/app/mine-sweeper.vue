@@ -8,31 +8,19 @@
       @hold-cell="mineSweeper.holdCell"
     />
 
-    <div>
-      {{ lastMineCount }} / {{ totalMineCount }}
-    </div>
+    <div>{{ lastMineCount }} / {{ totalMineCount }}</div>
 
-    <div v-if="mineSweeper.isGameOver">
-      Game Over
-    </div>
+    <div v-if="mineSweeper.isGameOver">Game Over</div>
 
-    <div v-else-if="mineSweeper.isGameClear">
-      Game Clear
-    </div>
+    <div v-else-if="mineSweeper.isGameClear">Game Clear</div>
 
-    <v-btn @click="mineSweeper.initialize">
-      Restart
-    </v-btn>
+    <v-btn @click="mineSweeper.initialize"> Restart </v-btn>
 
-    <v-btn @click="levelSelectDialog = true">
-      Level Select
-    </v-btn>
+    <v-btn @click="levelSelectDialog = true"> Level Select </v-btn>
 
     <v-dialog v-model="levelSelectDialog">
       <v-card>
-        <v-card-title>
-          Level Select
-        </v-card-title>
+        <v-card-title> Level Select </v-card-title>
         <v-card-text>
           <v-list>
             <v-list-item
@@ -41,14 +29,14 @@
               @click="setLevel(level.y, level.x, level.mineCount)"
             >
               <v-list-item-title>
-                {{ level.level }} : {{ level.x }} x {{ level.y }} ({{ level.mineCount }})
+                {{ level.level }} : {{ level.x }} x {{ level.y }} ({{
+                  level.mineCount
+                }})
               </v-list-item-title>
             </v-list-item>
 
             <v-list-item>
-              <v-list-item-title class="mb-4">
-                Custom
-              </v-list-item-title>
+              <v-list-item-title class="mb-4"> Custom </v-list-item-title>
               <v-list-item-content>
                 <v-row>
                   <v-number-input
@@ -70,7 +58,15 @@
                     :max="customLevel.width * customLevel.height - 10"
                   />
                 </v-row>
-                <v-btn @click="setLevel(customLevel.height, customLevel.width, customLevel.mineCount)">
+                <v-btn
+                  @click="
+                    setLevel(
+                      customLevel.height,
+                      customLevel.width,
+                      customLevel.mineCount,
+                    )
+                  "
+                >
                   Set
                 </v-btn>
               </v-list-item-content>

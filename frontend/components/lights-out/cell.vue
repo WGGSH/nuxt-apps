@@ -8,7 +8,7 @@
     :color="cell ? 'primary' : 'background'"
     @click="onClickCell"
   >
-    <div v-if="props.showAnswer && props.answer" class="answer"></div>
+    <div v-if="props.showAnswer && props.answer" class="answer" />
   </v-card>
 </template>
 
@@ -24,24 +24,24 @@ const emits = defineEmits<{
 }>();
 
 const onClickCell = () => {
-  emits("click");
+  emits('click');
 };
 </script>
 
 <style scoped lang="scss">
 .cell {
   padding-top: 100%;
-  border: 1px solid;
   background-color: rgb(var(--v-theme-on-background));
+  border: 1px solid;
 
   > .answer {
-    color: red;
     position: absolute;
     top: 25%;
     left: 25%;
     // border: 1px solid;
     width: 50%;
     height: 50%;
+    color: red;
     background-color: rgb(var(--v-theme-secondary));
   }
 }

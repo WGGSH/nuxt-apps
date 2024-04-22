@@ -11,12 +11,19 @@ export const useMineSweeper = defineStore('useMineSweeper', {
   }),
   getters: {
     lastMineCount(): number {
-      return this.mineCount - this.field.flat().filter(cell => cell.status === 'flagged').length;
+      return (
+        this.mineCount -
+        this.field.flat().filter((cell) => cell.status === 'flagged').length
+      );
     },
     isGameClear(): boolean {
       return (
         // 地雷以外のマスがすべて開かれるとクリア
-        this.field.flat().filter(cell => !cell.isMine && cell.status === 'revealed').length === this.fieldY * this.fieldX - this.mineCount
+        this.field
+          .flat()
+          .filter((cell) => !cell.isMine && cell.status === 'revealed')
+          .length ===
+        this.fieldY * this.fieldX - this.mineCount
       );
     },
   },
@@ -35,7 +42,7 @@ export const useMineSweeper = defineStore('useMineSweeper', {
     },
     start(y: number, x: number) {
       // 盤面作成
-      this.field.forEach(row =>
+      this.field.forEach((row) =>
         row.forEach((cell) => {
           cell.isMine = false;
           cell.mineCount = 0;
@@ -96,7 +103,7 @@ export const useMineSweeper = defineStore('useMineSweeper', {
       if (this.field[y][x].isMine) {
         this.isGameOver = true;
         // すべての地雷を表示
-        this.field.forEach(row =>
+        this.field.forEach((row) =>
           row.forEach((cell) => {
             if (cell.isMine) {
               cell.status = 'revealed';

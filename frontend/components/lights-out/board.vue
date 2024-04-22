@@ -7,7 +7,12 @@
         class="cell"
         :class="{ 'cell--on': cell }"
       >
-        <lights-out-cell :cell="cell" :answer="shortestField[y][x]" :show-answer="showAnswer" @click="onClickCell(y, x)" />
+        <lights-out-cell
+          :cell="cell"
+          :answer="shortestField[y][x]"
+          :show-answer="showAnswer"
+          @click="onClickCell(y, x)"
+        />
       </div>
     </div>
   </div>
@@ -17,6 +22,7 @@
 const props = defineProps<{
   field: boolean[][];
   shortestField: boolean[][];
+
   showAnswer: boolean;
 }>();
 
@@ -25,7 +31,7 @@ const emits = defineEmits<{
 }>();
 
 const onClickCell = (y: number, x: number) => {
-  emits("onClickCell", y, x);
+  emits('onClickCell', y, x);
 };
 </script>
 

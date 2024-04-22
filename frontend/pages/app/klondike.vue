@@ -1,9 +1,6 @@
 <template>
   <v-container class="pa-0">
-    <v-container
-      class="board"
-      :style="{ 'background-color': boardColor }"
-    >
+    <v-container class="board" :style="{ 'background-color': boardColor }">
       <klondike-board
         :deck="deck"
         :fields="fields"
@@ -23,9 +20,7 @@
     <v-container>
       <v-row>
         <v-col>
-          <v-btn @click="klondike.start()">
-            Reset
-          </v-btn>
+          <v-btn @click="klondike.start()"> Reset </v-btn>
         </v-col>
         <v-col>
           {{ klondike.isGameClear ? 'Game Clear!' : '' }}

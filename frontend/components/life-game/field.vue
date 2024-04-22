@@ -1,14 +1,6 @@
 <template>
-  <v-card
-    v-if="props.field"
-    elevation="24"
-    class="field pa-2"
-  >
-    <div
-      v-for="(row, y) in props.field"
-      :key="y"
-      class="row"
-    >
+  <v-card v-if="props.field" elevation="24" class="field pa-2">
+    <div v-for="(row, y) in props.field" :key="y" class="row">
       <v-btn
         v-for="(cell, x) in row"
         :key="x"
@@ -24,13 +16,13 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-  field: boolean[][] | null
+  field: boolean[][] | null;
 }>();
 
 const size = computed(() => props.field?.length ?? 0);
 
 const emits = defineEmits<{
-  onClickCell:(y: number, x: number) => void
+  onClickCell: (y: number, x: number) => void;
 }>();
 
 const clickCell = (y: number, x: number) => {
@@ -41,7 +33,7 @@ const clickCell = (y: number, x: number) => {
 
 <style scoped lang="scss">
 .field {
-  >.row {
+  > .row {
     display: flex;
     justify-content: center;
     width: 100%;

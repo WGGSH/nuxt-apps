@@ -1,7 +1,7 @@
-import { SUITS } from "~/types/klondike";
-import type { Rank, Card } from "~/types/klondike";
+import { SUITS } from '~/types/klondike';
+import type { Rank, Card } from '~/types/klondike';
 
-export const useKlondike = defineStore("useKlondike", {
+export const useKlondike = defineStore('useKlondike', {
   state: () => ({
     deck: [] as Card[], // 52 cards
     fields: [] as Card[][], // 7 columns
@@ -236,10 +236,10 @@ export const useKlondike = defineStore("useKlondike", {
       }
     },
     isSuitMatch(card1: Card, card2: Card) {
-      if (card1.suit === "Spades" || card1.suit === "Clubs") {
-        return card2.suit === "Hearts" || card2.suit === "Diamonds";
+      if (card1.suit === 'Spades' || card1.suit === 'Clubs') {
+        return card2.suit === 'Hearts' || card2.suit === 'Diamonds';
       } else {
-        return card2.suit === "Spades" || card2.suit === "Clubs";
+        return card2.suit === 'Spades' || card2.suit === 'Clubs';
       }
     },
     resetSelected() {
