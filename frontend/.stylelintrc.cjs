@@ -6,9 +6,8 @@ module.exports = {
     'stylelint-config-recess-order',
     'stylelint-rscss',
   ],
-  ignoreFiles: [
-    '**/*.js',
-    '**/*.ts',
-  ],
+  ignoreFiles: ['**/*.js', '**/*.ts'],
+  rules: {
+    'property-no-vendor-prefix': null,
+  },
 };
-
