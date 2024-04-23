@@ -5,7 +5,7 @@
       :key="tower"
       class="tower ma-2"
       :style="{
-        height: `calc(${props.diskCount + 1} * ${props.diskSize}px)`
+        height: `calc(${props.diskCount + 1} * ${props.diskSize}px)`,
       }"
       @click="clickTower(index)"
     >
@@ -14,7 +14,7 @@
         :class="{ 'is-goal': index === towers.length - 1 }"
         :color="index === towers.length - 1 ? 'primary' : 'grey'"
         :style="{
-          width: `calc(${props.diskSize}px / 2)`
+          width: `calc(${props.diskSize}px / 2)`,
         }"
       />
       <div class="disk-margin" />
@@ -31,23 +31,21 @@
 </template>
 
 <script setup lang="ts">
-
 const props = defineProps<{
-  towers: number[][],
-  diskCount: number,
-  diskSize: number,
+  towers: number[][];
+  diskCount: number;
+  diskSize: number;
 }>();
 
 const diskSize = computed(() => props.diskSize);
 
 const emit = defineEmits<{
-  onClickTower:(index: number) => void,
+  onClickTower: (index: number) => void;
 }>();
 
 const clickTower = (index: number) => {
   emit('onClickTower', index);
 };
-
 </script>
 
 <style scoped lang="scss">
@@ -63,7 +61,7 @@ const clickTower = (index: number) => {
     width: calc(100% / 3);
     text-align: center;
 
-    >.pole {
+    > .pole {
       position: absolute;
       height: 100%;
 
@@ -72,7 +70,7 @@ const clickTower = (index: number) => {
       }
     }
 
-    >.disk-margin {
+    > .disk-margin {
       flex: 1;
     }
   }

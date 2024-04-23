@@ -19,7 +19,9 @@ export default defineNuxtPlugin((nuxtApp) => {
       };
 
       const handleClick = () => {
-        if (isHold) { return; }
+        if (isHold) {
+          return;
+        }
         binding.value.click();
       };
 

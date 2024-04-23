@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div
-      v-if="props.bundle.length"
-      class="card-bundle"
-    >
+    <div v-if="props.bundle.length" class="card-bundle">
       <klondike-card
         v-for="(card, index) in props.bundle"
         :key="card.id"
@@ -17,10 +14,7 @@
         @click="onClickCard(card)"
       />
     </div>
-    <div
-      v-else
-      class="card-bundle"
-    >
+    <div v-else class="card-bundle">
       <klondike-card
         :card="null"
         :is-face-up="false"
@@ -40,13 +34,12 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  click:(card: Card) => void;
+  click: (card: Card) => void;
 }>();
 
 const onClickCard = (card: Card) => {
   emit('click', card);
 };
-
 </script>
 
 <style scoped lang="scss">

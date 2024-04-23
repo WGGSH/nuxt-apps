@@ -11,10 +11,10 @@ export const useLightsOut = defineStore('useLightsOut', {
   }),
   getters: {
     isGameClear(): boolean {
-      return this.field.flat().every(cell => !cell);
+      return this.field.flat().every((cell) => !cell);
     },
     shortestField(): boolean[][] {
-      const field = this.startField.map(row => row.slice());
+      const field = this.startField.map((row) => row.slice());
       const shortestField = Array.from({ length: this.fieldY }, () =>
         Array.from({ length: this.fieldX }, () => false),
       );
@@ -32,7 +32,7 @@ export const useLightsOut = defineStore('useLightsOut', {
       return shortestField;
     },
     shortestCount(): number {
-      return this.shortestField.flat().filter(cell => cell).length;
+      return this.shortestField.flat().filter((cell) => cell).length;
     },
   },
   actions: {
@@ -49,12 +49,12 @@ export const useLightsOut = defineStore('useLightsOut', {
           }
         }),
       );
-      this.startField = this.field.map(row => row.slice());
+      this.startField = this.field.map((row) => row.slice());
       this.clickCount = 0;
       this.isShowAnswer = false;
     },
     restart() {
-      this.field = this.startField.map(row => row.slice());
+      this.field = this.startField.map((row) => row.slice());
       this.clickCount = 0;
       this.isShowAnswer = false;
     },

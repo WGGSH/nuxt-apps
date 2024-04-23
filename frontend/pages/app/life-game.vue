@@ -1,28 +1,12 @@
 <template>
   <v-container>
-    <life-game-field
-      :field="field"
-      @on-click-cell="clickCell"
-    />
+    <life-game-field :field="field" @on-click-cell="clickCell" />
 
     <v-divider class="ma-4" />
 
-    <v-btn
-      class="ma-2"
-      @click="lifeGame.next()"
-    >
-      next
-    </v-btn>
-    <v-btn
-      class="ma-2"
-      @click="lifeGame.start()"
-    >
-      reset
-    </v-btn>
-    <v-btn
-      class="ma-2"
-      @click="toggleAuto"
-    >
+    <v-btn class="ma-2" @click="lifeGame.next()"> next </v-btn>
+    <v-btn class="ma-2" @click="lifeGame.start()"> reset </v-btn>
+    <v-btn class="ma-2" @click="toggleAuto">
       {{ isAuto ? 'stop' : 'auto' }}
     </v-btn>
   </v-container>
@@ -54,5 +38,4 @@ const toggleAuto = () => {
 };
 
 lifeGame.start();
-
 </script>

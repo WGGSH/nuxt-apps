@@ -6,7 +6,8 @@
       class="card"
       :elevation="props.elevation || 24"
       :class="{
-        'color-red': props.card.suit === 'Hearts' || props.card.suit === 'Diamonds',
+        'color-red':
+          props.card.suit === 'Hearts' || props.card.suit === 'Diamonds',
         'is-selected': props.isSelected || false,
       }"
       @click="onClick"
@@ -71,13 +72,12 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  click:() => void;
+  click: () => void;
 }>();
 
 const onClick = () => {
   emit('click');
 };
-
 </script>
 
 <style scoped lang="scss">

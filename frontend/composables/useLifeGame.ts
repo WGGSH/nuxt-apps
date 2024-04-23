@@ -39,10 +39,18 @@ export const useLifeGame = defineStore('useLifeGame', {
           }
           let ny = y + dy;
           let nx = x + dx;
-          if (ny < 0) { ny += this.fieldSize; }
-          if (ny >= this.fieldSize) { ny -= this.fieldSize; }
-          if (nx < 0) { nx += this.fieldSize; }
-          if (nx >= this.fieldSize) { nx -= this.fieldSize; }
+          if (ny < 0) {
+            ny += this.fieldSize;
+          }
+          if (ny >= this.fieldSize) {
+            ny -= this.fieldSize;
+          }
+          if (nx < 0) {
+            nx += this.fieldSize;
+          }
+          if (nx >= this.fieldSize) {
+            nx -= this.fieldSize;
+          }
 
           if (this.field[ny][nx]) {
             count++;

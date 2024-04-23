@@ -7,10 +7,7 @@
       @on-click-tower="onClickTower"
     />
 
-    <div
-      class="selected-disk-field"
-      :style="{ height: `${DISK_SIZE}px` }"
-    >
+    <div class="selected-disk-field" :style="{ height: `${DISK_SIZE}px` }">
       <hanoi-tower-disk
         v-if="selectedDisk !== null"
         :disk="selectedDisk"
@@ -22,10 +19,7 @@
     <v-divider class="ma-4" />
 
     <v-row align="center">
-      <v-col
-        cols="8"
-        sm="6"
-      >
+      <v-col cols="8" sm="6">
         <v-number-input
           v-model="modelDiskCount"
           label="Disk Count"
@@ -36,17 +30,10 @@
         />
       </v-col>
 
-      <v-col
-        cols="4"
-        sm="2"
-      >
-        <v-btn @click="reset">
-          reset
-        </v-btn>
+      <v-col cols="4" sm="2">
+        <v-btn @click="reset"> reset </v-btn>
       </v-col>
-      <v-label v-if="hanoiTower.isClear">
-        clear!!
-      </v-label>
+      <v-label v-if="hanoiTower.isClear"> clear!! </v-label>
     </v-row>
   </v-container>
 </template>

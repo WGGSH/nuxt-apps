@@ -26,41 +26,27 @@
           :is-selected="props.isSelectedWaste"
           @click="onClickWaste"
         />
-        <klondike-card
-          v-else
-          :card="null"
-          :is-face-up="false"
-        />
+        <klondike-card v-else :card="null" :is-face-up="false" />
       </div>
 
       <!-- Piles -->
-      <div
-        v-for="(pile, index) in props.piles"
-        :key="index"
-        class="col"
-      >
+      <div v-for="(pile, index) in props.piles" :key="index" class="col">
         <klondike-card
           v-if="pile.length"
           :card="pile[pile.length - 1]"
           @click="onClickPile(index)"
         />
-        <klondike-card
-          v-else
-          :card="null"
-          @click="onClickPile(index)"
-        />
+        <klondike-card v-else :card="null" @click="onClickPile(index)" />
       </div>
     </div>
     <div class="row">
       <!-- Fields -->
-      <div
-        v-for="(field, index) in props.fields"
-        :key="index"
-        class="col"
-      >
+      <div v-for="(field, index) in props.fields" :key="index" class="col">
         <klondike-card-bundle
           :bundle="field"
-          :is-selected="props.isSelectedField && props.selectedFieldIndex === index"
+          :is-selected="
+            props.isSelectedField && props.selectedFieldIndex === index
+          "
           :selected-card="props.selectedCard"
           @click="onClickBundleCard($event, index)"
         />
@@ -84,11 +70,12 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  clickDeck:(card: Card) => void;
+  clickDeck: (card: Card) => void;
   clickEmptyDeck: () => void;
-  clickPile:(index: number) => void;
-  clickBundle:(index: number) => void;
+  clickPile: (index: number) => void;
+  clickBundle: (index: number) => void;
   clickWaste: () => void;
+  clickBundleCard: (card: Card, index: number) => void;
 }>();
 
 const onClickDeck = () => {
@@ -110,7 +97,6 @@ const onClickPile = (index: number) => {
 const onClickBundleCard = (card: Card, index: number) => {
   emit('clickBundleCard', card, index);
 };
-
 </script>
 
 <style scoped lang="scss">
@@ -118,14 +104,14 @@ const onClickBundleCard = (card: Card, index: number) => {
   display: flex;
   justify-content: space-between;
 
-  >.col {
+  > .col {
     width: calc(100vw / 7 - 8px);
     min-width: 20px;
     max-width: calc(100vw / 7);
     margin: 16px 0;
   }
 
-  >.waste {
+  > .waste {
     margin-right: calc(100vw / 7);
   }
 }

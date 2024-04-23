@@ -8,7 +8,10 @@
     "eslint:recommended",
     "@nuxtjs/eslint-config-typescript",
     "plugin:@typescript-eslint/recommended",
-    "plugin:vue/vue3-recommended"
+    "plugin:vue/vue3-recommended",
+    "@vue/eslint-config-typescript",
+    "@vue/eslint-config-prettier",
+    "prettier"
   ],
   "parser": "vue-eslint-parser",
   "parserOptions": {
@@ -32,17 +35,29 @@
   ],
   "rules": {
     "no-console": "off",
-    "comma-dangle": ["error", "always-multiline"],
-    "semi": ["error", "always"],
-    "space-before-function-paren": ["error", "never"],
+    "comma-dangle": [
+      "error",
+      "always-multiline"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "space-before-function-paren": [
+      "error",
+      "never"
+    ],
     "vue/multi-word-component-names": "off",
-    "vue/max-attributes-per-line": ["error", {
-      "singleline": {
-        "max": 1
-      },
-      "multiline": {
-        "max": 1
+    "vue/max-attributes-per-line": [
+      "error",
+      {
+        "singleline": {
+          "max": 5
+        },
+        "multiline": {
+          "max": 1
+        }
       }
-    }]
+    ]
   }
 }
