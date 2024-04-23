@@ -9,23 +9,25 @@
     "release": "nuxt generate && rm -r ../docs && cp -r .output/public ../docs",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "lint": "eslint **/*.{ts,vue}",
-    "lint-fix": "eslint --fix **/*.{ts,vue}",
-    "stylelint": "stylelint '**/*.vue'",
-    "stylelint-fix": "stylelint --fix '**/*.vue'",
-    "lint-staged": "lint-staged",
-    "generate-pwa-assets": "pwa-assets-generator --preset minimal-2023 public/icon.svg"
+    "lint": "eslint '**/*.{ts,vue}'",
+    "lint-fix": "eslint --fix '**/*.{ts,vue}'",
+    "stylelint": "stylelint '**/*.{vue,scss}'",
+    "stylelint-fix": "stylelint --fix '**/*.{vue,scss}'",
+    "generate-pwa-assets": "pwa-assets-generator --preset minimal-2023 public/icon.svg",
+    "prepare": "cd .. && husky install frontend/.husky"
   },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
-    },
-    "lint-staged": {
-      "*.{ts,vue}": [
-        "eslint --fix",
-        "stylelint --fix"
-      ]
     }
+  },
+  "lint-staged": {
+    "**/*.{ts,vue}": [
+      "eslint --max-warnings=0"
+    ],
+    "**/*.{vue,scss}": [
+      "stylelint --max-warnings=1"
+    ]
   },
   "dependencies": {
     "@pinia/nuxt": "^0.5.1",
@@ -44,7 +46,7 @@
     "@vue/eslint-config-typescript": "^13.0.0",
     "eslint": "^8.57.0",
     "eslint-plugin-nuxt": "^4.0.0",
-    "husky": "^9.0.11",
+    "husky": "^8.0.3",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
     "sass": "^1.72.0",
