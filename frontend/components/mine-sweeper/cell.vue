@@ -1,9 +1,9 @@
 <template>
   <!-- <v-card v-hold:500="onHold" class="cell" :style="cellStyle" @click="onClick"> -->
   <v-card
+    v-click-and-hold="{ click: onClick, longPress: onHold }"
     class="cell"
     :style="cellStyle"
-    v-click-and-hold="{ click: onClick, longPress: onHold }"
   >
     <div v-if="isMine" class="icon">
       <v-icon v-if="isGameOver || status === 'revealed'" :icon="mdiBomb" />
@@ -121,9 +121,9 @@ const onHold = () => {
 
   > .icon {
     position: absolute;
-    font-size: 125%;
     top: 50%;
     left: 50%;
+    font-size: 125%;
     transform: translate(-50%, -50%);
 
     & .is-empty {

@@ -75,6 +75,7 @@ const emit = defineEmits<{
   clickPile: (index: number) => void;
   clickBundle: (index: number) => void;
   clickWaste: () => void;
+  clickBundleCard: (card: Card, index: number) => void;
 }>();
 
 const onClickDeck = () => {
